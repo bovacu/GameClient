@@ -11,6 +11,7 @@ public class GameSelectionManager : MonoBehaviour {
     private bool alreadySelectedGame = false;
     public Text loading_Text;
     public GameObject gamesGameObject;
+    public GameObject panelOfPlayersGameObject;
     private Thread waiterForPlayer;
 
     private void Start() {
@@ -35,6 +36,7 @@ public class GameSelectionManager : MonoBehaviour {
             // Waiting for response.
             var _response = ClientTCP.getResponseFromServer();
             this.loading_Text.gameObject.SetActive(false);
+            this.panelOfPlayersGameObject.SetActive(true);
         } else {
             // Show modal window with error.
         }

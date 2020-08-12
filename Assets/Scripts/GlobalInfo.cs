@@ -41,11 +41,11 @@ public static class GlobalInfo {
         }
 
         // The connection established answer. DO NOT MOVE, REALLY REALLY IMPORTANT.
-        ClientTCP.getResponseFromServer();
+        ClientTCP.getResponseFromServer("Welcome answer");
         GlobalInfo.loadingProgress += 33;
 
         ClientTCP.sendPacketAppVersion();
-        Response _response = ClientTCP.getResponseFromServer();
+        Response _response = ClientTCP.getResponseFromServer("App version");
 
         if(_response != Response.OK) {
             GlobalInfo.error = ERROR.DIFFERENT_VERSION;

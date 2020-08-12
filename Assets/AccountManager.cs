@@ -68,9 +68,10 @@ public class AccountManager : MonoBehaviour {
         this.enter_Btn.gameObject.SetActive(true);
         this.remember_Toggle.gameObject.SetActive(true);
 
-        var _posEnter = this.enter_Btn.gameObject.transform.position;
+        var _gameObject = this.enter_Btn.gameObject;
+        var _posEnter = _gameObject.transform.position;
         _posEnter.y = this.password2_Input.gameObject.transform.position.y;
-        this.enter_Btn.gameObject.transform.position = _posEnter;
+        _gameObject.transform.position = _posEnter;
 
         this.errorMsg_Text.gameObject.SetActive(false);
     }
@@ -84,7 +85,7 @@ public class AccountManager : MonoBehaviour {
 
     private void login() {
         ClientTCP.sendPacketLogin(this.user_Input.text, this.password_Input.text);
-        Response _response = ClientTCP.getResponseFromServer();
+        Response _response = ClientTCP.getResponseFromServer("login");
 
         if (this.user_Input.text == string.Empty || this.password_Input.text == string.Empty || _response == Response.LOGIN_WRONG_USER_OR_PASSWORD_ERROR) {
             this.errorMsg_Text.text = "User or/and password incorrect.";
@@ -100,11 +101,32 @@ public class AccountManager : MonoBehaviour {
             return;
         }
 
+        if (_response == Response.EXPIRATION_TIME_ERROR) {
+            this.errorMsg_Text.text = "Connection time out to server.";
+            this.errorMsg_Text.color = Color.red;
+            this.errorMsg_Text.gameObject.SetActive(true);
+            return;
+        }
+
         ClientTCP.sendPacketPlayerInfo();
 
         // This is just an okay from the server, because the player is already confirmed to be legit,
         // but we still need to take the answer from the server.
-        ClientTCP.getResponseFromServer();
+        _response = ClientTCP.getResponseFromServer("player info");
+        
+        if(_response == Response.ERROR) {
+            this.errorMsg_Text.text = "Internal app error, contact developers.";
+            this.errorMsg_Text.color = Color.red;
+            this.errorMsg_Text.gameObject.SetActive(true);
+            return;
+        }
+
+        if (_response == Response.EXPIRATION_TIME_ERROR) {
+            this.errorMsg_Text.text = "Connection time out to server.";
+            this.errorMsg_Text.color = Color.red;
+            this.errorMsg_Text.gameObject.SetActive(true);
+            return;
+        }
 
         GlobalInfo.playerInfo.userName = this.user_Input.text;
         GlobalInfo.playerInfo.password = this.password_Input.text;

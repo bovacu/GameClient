@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Sockets;
 using UnityEngine;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using Debug = UnityEngine.Debug;
 
 public class ClientTCP {
     private const float EXPIRATION_TIME = 10.0f;
@@ -40,14 +42,33 @@ public class ClientTCP {
         else {
             ClientTCP.inOutStream = ClientTCP.clientSocket.GetStream();
             ClientTCP.inOutStream.BeginRead(ClientTCP.buffer, 0, MAX_BUFFER_SIZE * 2, onReceive, null);
-
-            // The welcome message
-            ClientTCP.getResponseFromServer();
+            
+            // // The welcome message
+            // ClientTCP.getResponseFromServer("primero");
         }
     }
 
-    public static Response getResponseFromServer() {
+    public static Response getResponseFromServer(string _debugging = "") {
+        
+        var _t = new Thread(() => {
+            DateTime _start = DateTime.Now;
+
+            while (((DateTime.Now - _start).TotalMilliseconds / 1000f) < 5f && !canGetResponse) {
+                Thread.SpinWait(100);
+            }
+
+            Debug.Log($"Sale del bucle: {_debugging} con tiempo {((DateTime.Now - _start).TotalMilliseconds / 1000f)}");
+            if (((DateTime.Now - _start).TotalMilliseconds / 1000f) <= 5f) return;
+            Debug.Log("Devuelve el error: " + _debugging);
+            serverResponse = Response.EXPIRATION_TIME_ERROR;
+            canGetResponse = true;
+
+        });
+        _t.Start();
+        
         while (!canGetResponse) {  }
+        _t.Interrupt();
+        Debug.Log($"Obtiene: {_debugging}");
 
         canGetResponse = false;
         return serverResponse;
@@ -158,7 +179,7 @@ public class ClientTCP {
         var _buffer = new ByteBuffer();
 
         // 2. Add packet ID.
-        _buffer.writeInteger((int)ClientPckts.LOGIN);
+        _buffer.writeInteger((int)ClientPckts.SEARCH_MATCH);
 
         // 3. Write desired info.
         _buffer.writeInteger((int)_typeOfGame);
