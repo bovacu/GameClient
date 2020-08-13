@@ -6,6 +6,11 @@ using UnityEngine;
 
 public static class GlobalInfo {
 
+    public struct OtherPlayer {
+        public string UserName;
+        public int ServerId;
+    }
+
     public enum ERROR { NONE, TIME_OUT, DIFFERENT_VERSION, ALREADY_ONLINE };
 
     public static PlayerInfo playerInfo;
@@ -18,6 +23,7 @@ public static class GlobalInfo {
     private static int port = 5555;
     private static Thread loadingThread;
 
+    private static List<OtherPlayer> otherPlayers;
 
     // Tasks to load.
     // 1. Connect to the server. (50%)
@@ -43,6 +49,7 @@ public static class GlobalInfo {
         // The connection established answer. DO NOT MOVE, REALLY REALLY IMPORTANT.
         ClientTCP.getResponseFromServer("Welcome answer");
         GlobalInfo.loadingProgress += 33;
+        GlobalInfo.otherPlayers = new List<OtherPlayer>();
 
         ClientTCP.sendPacketAppVersion();
         Response _response = ClientTCP.getResponseFromServer("App version");
@@ -123,5 +130,9 @@ public static class GlobalInfo {
     public static void stopLoadingForError() {
         if(GlobalInfo.loadingThread.IsAlive)
             GlobalInfo.loadingThread.Interrupt();
+    }
+
+    public static List<OtherPlayer> getOtherPlayers() {
+        return GlobalInfo.otherPlayers;
     }
 }

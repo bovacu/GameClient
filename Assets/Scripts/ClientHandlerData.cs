@@ -13,6 +13,8 @@ public class ClientHandlerData {
         ClientHandlerData.packetListener.Add((int)ServerPckts.WELCOME_MSG, handleWelcomeMsg);
         ClientHandlerData.packetListener.Add((int)ServerPckts.SERVER_RESPONSE, handleServerResponse);
         ClientHandlerData.packetListener.Add((int)ServerPckts.GET_PLAYER_INFO, handleGetPlayerInfo);
+        ClientHandlerData.packetListener.Add((int)ServerPckts.ADDED_TO_MATCH, handleAddedToMatch);
+        ClientHandlerData.packetListener.Add((int)ServerPckts.PLAYER_JOINED_MATCH, handlePlayerJoinedMatch);
     }
 
     public static Response handleData(byte[] _data) {
@@ -109,6 +111,27 @@ public class ClientHandlerData {
         GlobalInfo.playerInfo.currencyAmount = _buffer.readInteger();
         GlobalInfo.playerInfo.reports = _buffer.readInteger();
 
+        return Response.OK;
+    }
+
+    private static Response handleAddedToMatch(byte[] _data) {
+        var _buffer = new ByteBuffer();
+        _buffer.writeBytes(_data);
+        var _packetId = _buffer.readInteger();
+
+        var _numberOfPlayers = _buffer.readInteger();
+        
+        
+        return Response.OK;
+    }
+
+    private static Response handlePlayerJoinedMatch(byte[] _data) {
+        var _buffer = new ByteBuffer();
+        _buffer.writeBytes(_data);
+        var _packetId = _buffer.readInteger();
+        
+        
+        
         return Response.OK;
     }
 }

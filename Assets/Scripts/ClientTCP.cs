@@ -56,10 +56,8 @@ public class ClientTCP {
             while (((DateTime.Now - _start).TotalMilliseconds / 1000f) < 5f && !canGetResponse) {
                 Thread.SpinWait(100);
             }
-
-            Debug.Log($"Sale del bucle: {_debugging} con tiempo {((DateTime.Now - _start).TotalMilliseconds / 1000f)}");
+            
             if (((DateTime.Now - _start).TotalMilliseconds / 1000f) <= 5f) return;
-            Debug.Log("Devuelve el error: " + _debugging);
             serverResponse = Response.EXPIRATION_TIME_ERROR;
             canGetResponse = true;
 
@@ -68,7 +66,6 @@ public class ClientTCP {
         
         while (!canGetResponse) {  }
         _t.Interrupt();
-        Debug.Log($"Obtiene: {_debugging}");
 
         canGetResponse = false;
         return serverResponse;
@@ -89,7 +86,10 @@ public class ClientTCP {
             canGetResponse = true;
 
             ClientTCP.inOutStream.BeginRead(ClientTCP.buffer, 0, MAX_BUFFER_SIZE * 2, onReceive, null);
-        } catch(Exception) {  }
+        }
+        catch (Exception) {
+            // ignored
+        }
     }
 
     private static void sendData(byte[] _data) {

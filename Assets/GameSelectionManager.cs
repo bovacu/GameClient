@@ -35,10 +35,21 @@ public class GameSelectionManager : MonoBehaviour {
             this.loading_Text.gameObject.SetActive(true);
             // Waiting for response.
             var _response = ClientTCP.getResponseFromServer();
-            this.loading_Text.gameObject.SetActive(false);
-            this.panelOfPlayersGameObject.SetActive(true);
+
+            // TODO This thread waits for all players to join the match and starts the match once it is filled.
+            Thread _t = new Thread(() => {
+                // TODO 1. Get response from server with currentNumOfPlayers.
+                // TODO 2. if currentNumOfPlayers == TypeOfGame NumOfPlayers => start game
+                // TODO 3. while currentNumOfPlayers < TypeOfGame NumOfPlayers
+                //        TODO 4. Get response from server with currentNumOfPlayers.
+                //        TODO 5. Update locally the icons of joined players.
+                //        TODO 6. if currentNumOfPlayers == TypeOfGame NumOfPlayers => start game
+                return;
+            });
+            _t.Start();
+            
         } else {
-            // Show modal window with error.
+            // TODO Show modal window with error.
         }
         
     }

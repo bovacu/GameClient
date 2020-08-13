@@ -1,7 +1,9 @@
 ﻿public enum ServerPckts {
     WELCOME_MSG         = 1,
     SERVER_RESPONSE     = 2,
-    GET_PLAYER_INFO     = 3
+    GET_PLAYER_INFO     = 3,
+    ADDED_TO_MATCH      = 4,
+    PLAYER_JOINED_MATCH = 5
 }
 
 public enum ClientPckts {

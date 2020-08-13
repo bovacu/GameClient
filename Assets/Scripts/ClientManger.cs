@@ -10,6 +10,7 @@ public struct PlayerInfo {
     public bool remember;
 
     public bool online;
+    public int matchId;
 }
 
 public class ClientManger : MonoBehaviour {
