@@ -85,7 +85,7 @@ public class AccountManager : MonoBehaviour {
 
     private void login() {
         ClientTCP.sendPacketLogin(this.user_Input.text, this.password_Input.text);
-        Response _response = ClientTCP.getResponseFromServer("login");
+        Response _response = ClientTCP.getResponseFromServer(true, "Main menu logging");
 
         if (this.user_Input.text == string.Empty || this.password_Input.text == string.Empty || _response == Response.LOGIN_WRONG_USER_OR_PASSWORD_ERROR) {
             this.errorMsg_Text.text = "User or/and password incorrect.";
@@ -108,11 +108,18 @@ public class AccountManager : MonoBehaviour {
             return;
         }
 
+        if (_response == Response.PLAYER_ALREADY_ONLINE_ERROR) {
+            this.errorMsg_Text.text = "Account already online.";
+            this.errorMsg_Text.color = Color.red;
+            this.errorMsg_Text.gameObject.SetActive(true);
+            return;
+        }
+
         ClientTCP.sendPacketPlayerInfo();
 
         // This is just an okay from the server, because the player is already confirmed to be legit,
         // but we still need to take the answer from the server.
-        _response = ClientTCP.getResponseFromServer("player info");
+        _response = ClientTCP.getResponseFromServer(true, "Main menu player info");
         
         if(_response == Response.ERROR) {
             this.errorMsg_Text.text = "Internal app error, contact developers.";
@@ -162,7 +169,7 @@ public class AccountManager : MonoBehaviour {
         }
 
         ClientTCP.sendPacketRegisterAccount(this.user_Input.text, this.password_Input.text); 
-        Response _response = ClientTCP.getResponseFromServer();
+        Response _response = ClientTCP.getResponseFromServer(true, "register");
         
         if(_response == Response.REGISTER_USER_DUPLICATED_ERROR) {
             this.errorMsg_Text.text = "This user name is already in use";

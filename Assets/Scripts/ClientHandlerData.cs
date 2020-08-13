@@ -121,6 +121,23 @@ public class ClientHandlerData {
 
         var _numberOfPlayers = _buffer.readInteger();
         
+        Debug.Log($"You have been added to a match with {_numberOfPlayers} players");
+        
+        var _playersIds = new List<int>();
+        for(var _i = 0; _i < _numberOfPlayers; _i++)
+            _playersIds.Add(_buffer.readInteger());
+ 
+        var _playersNames = new List<string>();
+        for(var _i = 0; _i < _numberOfPlayers; _i++)
+            _playersNames.Add(_buffer.readString());
+
+        for (var _i = 0; _i < _numberOfPlayers; _i++) {
+            GlobalInfo.otherPlayers.Add(new GlobalInfo.OtherPlayer(_playersIds[_i], _playersNames[_i]));
+            Debug.Log($"Player { _playersNames[_i]} was already in party.");
+        }
+
+        GlobalInfo.playerInfo.matchId = _buffer.readInteger();
+        GlobalInfo.playerInfo.inMatch = true;
         
         return Response.OK;
     }
@@ -129,8 +146,12 @@ public class ClientHandlerData {
         var _buffer = new ByteBuffer();
         _buffer.writeBytes(_data);
         var _packetId = _buffer.readInteger();
+
+        var _playerId = _buffer.readInteger();
+        var _playerName = _buffer.readString();
+        Debug.Log($"Player {_playerName}has been added to the match.");
         
-        
+        GlobalInfo.otherPlayers.Add(new GlobalInfo.OtherPlayer(_playerId, _playerName));
         
         return Response.OK;
     }

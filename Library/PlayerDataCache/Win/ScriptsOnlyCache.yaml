@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - AccountManager
     - ClientManger
+    - GameSelectionManager
     - LoadingScreenManager
     - PlayManager
     - ProgressBar
@@ -15,6 +16,7 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.Rider.Editor.dll:
+    - Packages.Rider.Editor.RiderScriptEditorData
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -52,25 +54,25 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11170}
+      Script: {instanceID: 11172}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11464}
     - Class: 114
-      Script: {instanceID: 11516}
+      Script: {instanceID: 11518}
     - Class: 114
-      Script: {instanceID: 12096}
+      Script: {instanceID: 12098}
     - Class: 114
-      Script: {instanceID: 12184}
+      Script: {instanceID: 12186}
     - Class: 114
-      Script: {instanceID: 12894}
+      Script: {instanceID: 12900}
     - Class: 114
-      Script: {instanceID: 13658}
+      Script: {instanceID: 13664}
     - Class: 114
-      Script: {instanceID: 13814}
+      Script: {instanceID: 13820}
     - Class: 114
-      Script: {instanceID: 14270}
+      Script: {instanceID: 14276}
     - Class: 114
-      Script: {instanceID: 14312}
+      Script: {instanceID: 14318}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -105,29 +107,31 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11170}
+      Script: {instanceID: 11172}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11464}
     - Class: 114
-      Script: {instanceID: 11516}
+      Script: {instanceID: 11518}
     - Class: 114
-      Script: {instanceID: 12184}
+      Script: {instanceID: 12186}
     - Class: 114
-      Script: {instanceID: 12270}
+      Script: {instanceID: 12232}
     - Class: 114
-      Script: {instanceID: 12374}
+      Script: {instanceID: 12276}
     - Class: 114
-      Script: {instanceID: 12702}
+      Script: {instanceID: 12380}
     - Class: 114
-      Script: {instanceID: 12894}
+      Script: {instanceID: 12708}
     - Class: 114
-      Script: {instanceID: 13184}
+      Script: {instanceID: 12900}
     - Class: 114
-      Script: {instanceID: 13658}
+      Script: {instanceID: 13190}
     - Class: 114
-      Script: {instanceID: 14270}
+      Script: {instanceID: 13664}
     - Class: 114
-      Script: {instanceID: 14290}
+      Script: {instanceID: 14276}
+    - Class: 114
+      Script: {instanceID: 14296}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -369,6 +373,12 @@ ScriptsOnlyBuild:
     className: SpriteShape
   - hash:
       serializedVersion: 2
+      Hash: 378ceb21ff8dcb6207b00771018aca6c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameSelectionManager
+  - hash:
+      serializedVersion: 2
       Hash: b8a5e8091ab0b8861d2add371082c5e0
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -393,7 +403,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: a30cfe2c8442575fa1b1a27eb8baac17
+      Hash: 9c7692d3949ca89477162b60489000f9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayManager

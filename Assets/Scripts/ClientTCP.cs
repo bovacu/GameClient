@@ -10,7 +10,7 @@ using Debug = UnityEngine.Debug;
 public class ClientTCP {
     private const float EXPIRATION_TIME = 10.0f;
     private const int MAX_BUFFER_SIZE = 4096;
-    private static bool canGetResponse = false;
+    private static volatile bool canGetResponse = false;
     private static Response serverResponse = Response.NONE_RESPONSE;
 
     private static TcpClient clientSocket;
@@ -42,30 +42,50 @@ public class ClientTCP {
         else {
             ClientTCP.inOutStream = ClientTCP.clientSocket.GetStream();
             ClientTCP.inOutStream.BeginRead(ClientTCP.buffer, 0, MAX_BUFFER_SIZE * 2, onReceive, null);
-            
-            // // The welcome message
-            // ClientTCP.getResponseFromServer("primero");
         }
     }
 
-    public static Response getResponseFromServer(string _debugging = "") {
+    public static Response getResponseFromServer(bool _hasExpirationTime = true, string _debugging = "") {
         
         var _t = new Thread(() => {
+            if(_debugging.Length != 0)
+                Debug.Log($"Waiting a response from server of: {_debugging}");
             DateTime _start = DateTime.Now;
 
             while (((DateTime.Now - _start).TotalMilliseconds / 1000f) < 5f && !canGetResponse) {
-                Thread.SpinWait(100);
+                Thread.SpinWait(1);
             }
             
             if (((DateTime.Now - _start).TotalMilliseconds / 1000f) <= 5f) return;
+            
+            if(_debugging.Length != 0)
+                Debug.Log($"There was an expiration time for: {_debugging}");
+            
             serverResponse = Response.EXPIRATION_TIME_ERROR;
+            
+            // This is to unlock the while below
             canGetResponse = true;
 
         });
-        _t.Start();
+        
+        if(_hasExpirationTime)
+            _t.Start();
         
         while (!canGetResponse) {  }
-        _t.Interrupt();
+
+        if (_hasExpirationTime) {
+            try {
+                _t.Abort();
+            }
+            catch (Exception _ex) {
+                Console.WriteLine(_ex);
+                throw;
+            }
+        }
+            
+        
+        if(_debugging.Length != 0)
+            Debug.Log($"Got a response {serverResponse} from: {_debugging}");
 
         canGetResponse = false;
         return serverResponse;

@@ -2,17 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct PlayerInfo {
-    public string userName;
-    public string password;
-    public int currencyAmount;
-    public int reports;
-    public bool remember;
-
-    public bool online;
-    public int matchId;
-}
-
 public class ClientManger : MonoBehaviour {
 
     // Start is called before the first frame update

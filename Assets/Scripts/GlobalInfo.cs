@@ -6,9 +6,26 @@ using UnityEngine;
 
 public static class GlobalInfo {
 
+    public struct PlayerInfo {
+        public string userName;
+        public string password;
+        public int currencyAmount;
+        public int reports;
+        public bool remember;
+
+        public bool online;
+        public bool inMatch;
+        public int matchId;
+    }
+    
     public struct OtherPlayer {
-        public string UserName;
-        public int ServerId;
+        public string UserName { get; }
+        public int Id  { get; }
+        
+        public OtherPlayer(int _id, string _name) {
+            this.Id = _id;
+            this.UserName = _name;
+        }
     }
 
     public enum ERROR { NONE, TIME_OUT, DIFFERENT_VERSION, ALREADY_ONLINE };
@@ -23,7 +40,7 @@ public static class GlobalInfo {
     private static int port = 5555;
     private static Thread loadingThread;
 
-    private static List<OtherPlayer> otherPlayers;
+    public static List<OtherPlayer> otherPlayers;
 
     // Tasks to load.
     // 1. Connect to the server. (50%)
@@ -47,12 +64,12 @@ public static class GlobalInfo {
         }
 
         // The connection established answer. DO NOT MOVE, REALLY REALLY IMPORTANT.
-        ClientTCP.getResponseFromServer("Welcome answer");
+        ClientTCP.getResponseFromServer(true, "Welcome response");
         GlobalInfo.loadingProgress += 33;
         GlobalInfo.otherPlayers = new List<OtherPlayer>();
 
         ClientTCP.sendPacketAppVersion();
-        Response _response = ClientTCP.getResponseFromServer("App version");
+        Response _response = ClientTCP.getResponseFromServer(true, "App version");
 
         if(_response != Response.OK) {
             GlobalInfo.error = ERROR.DIFFERENT_VERSION;
@@ -67,7 +84,7 @@ public static class GlobalInfo {
             string _password = InnerFileReader.getProperty("password");
 
             ClientTCP.sendPacketLogin(_user, _password);
-            Response _couldLogin = ClientTCP.getResponseFromServer();
+            Response _couldLogin = ClientTCP.getResponseFromServer(true, "Automatic Login");
 
             if (_couldLogin == Response.OK) {
                 GlobalInfo.playerInfo.userName = _user;
@@ -76,7 +93,7 @@ public static class GlobalInfo {
                 ClientTCP.sendPacketPlayerInfo();
                 // This is just an okay from the server, because the player is already confirmed to be legit,
                 // but we still need to take the answer from the server.
-                ClientTCP.getResponseFromServer();
+                ClientTCP.getResponseFromServer(true, "Automatic Player info ");
 
                 // GlobalInfo.playerInfo.currencyAmount and GlobalInfo.playerInfo.reports are set in the corresponding handler.
                 GlobalInfo.playerInfo.remember = true;
@@ -130,9 +147,5 @@ public static class GlobalInfo {
     public static void stopLoadingForError() {
         if(GlobalInfo.loadingThread.IsAlive)
             GlobalInfo.loadingThread.Interrupt();
-    }
-
-    public static List<OtherPlayer> getOtherPlayers() {
-        return GlobalInfo.otherPlayers;
     }
 }
