@@ -4,7 +4,9 @@
     GET_PLAYER_INFO     = 3,
     ADDED_TO_MATCH      = 4,
     PLAYER_JOINED_MATCH = 5,
-    MATCH_STARTS        = 6
+    MATCH_STARTS        = 6,
+    SENDING_CARD        = 7,
+    SENDING_LIST_CARDS  = 8
 }
 
 public enum ClientPckts {

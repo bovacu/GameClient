@@ -96,11 +96,11 @@ public class GameSelectionManager : MonoBehaviour {
                     
                     //        TODO 6. if currentNumOfPlayers == TypeOfGame NumOfPlayers => start game
                     if (GlobalInfo.otherPlayers.Count + 1 == typeOfGameToMaxPlayers(TypeOfGame.TEST)) {
+                        _response = ClientTCP.getResponseFromServer(true, "Match started");
                         // TODO start game
                         if (_response == Response.LOAD_MATCH_SCENE) {
                             Debug.Log("This is the same as Got response: MATCH_START from Match Started");
                             this.loadGameScene = true;
-                            return;
                         }
 
                         break;

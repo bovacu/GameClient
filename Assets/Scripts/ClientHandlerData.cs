@@ -16,6 +16,8 @@ public class ClientHandlerData {
         ClientHandlerData.packetListener.Add((int)ServerPckts.ADDED_TO_MATCH, handleAddedToMatch);
         ClientHandlerData.packetListener.Add((int)ServerPckts.PLAYER_JOINED_MATCH, handlePlayerJoinedMatch);
         ClientHandlerData.packetListener.Add((int)ServerPckts.MATCH_STARTS, handleMatchStarts);
+        ClientHandlerData.packetListener.Add((int)ServerPckts.SENDING_CARD, handleReceivingCard);
+        ClientHandlerData.packetListener.Add((int)ServerPckts.SENDING_LIST_CARDS, handleReceivingCardList);
     }
 
     public static Response handleData(byte[] _data) {
@@ -166,6 +168,36 @@ public class ClientHandlerData {
         _buffer.readShort();
 
         return Response.LOAD_MATCH_SCENE;
+    }
+
+    private static Response handleReceivingCard(byte[] _data) {
+        var _buffer = new ByteBuffer();
+        _buffer.writeBytes(_data);
+        var _packetId = _buffer.readInteger();
+        var _value = _buffer.readInteger();
+        var _suit = (Suit) _buffer.readInteger();
+        var _card = new Card(_value, _suit);
+        Debug.Log($"{_value} of {_suit}");
+
+        return Response.OK;
+    }
+
+    private static Response handleReceivingCardList(byte[] _data) {
+        var _buffer = new ByteBuffer();
+        _buffer.writeBytes(_data);
+        var _packetId = _buffer.readInteger();
+
+        var _numberOfCards = _buffer.readInteger();
+        var _cardList = new List<Card>();
+        
+        for (var _i = 0; _i < _numberOfCards; _i++) {
+            var _value = _buffer.readInteger();
+            var _suit = (Suit) _buffer.readInteger();
+            _cardList.Add(new Card(_value, _suit));
+            Debug.Log($"{_value} of {_suit}");
+        }
+        
+        return Response.OK;
     }
     
 }

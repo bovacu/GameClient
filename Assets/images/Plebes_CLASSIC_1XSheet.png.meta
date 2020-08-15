@@ -1,0 +1,1472 @@
+fileFormatVersion: 2
+guid: 0658791a09c1f3743b9a56b2ff192476
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4041591911056825606
+    second: Plebes_CLASSIC_1XSheet_0
+  - first:
+      213: -2007734343613109698
+    second: Plebes_CLASSIC_1XSheet_1
+  - first:
+      213: -4189990887791385495
+    second: Plebes_CLASSIC_1XSheet_2
+  - first:
+      213: -8115231837495117107
+    second: Plebes_CLASSIC_1XSheet_3
+  - first:
+      213: 5388418717914900858
+    second: Plebes_CLASSIC_1XSheet_4
+  - first:
+      213: -1016831243232587663
+    second: Plebes_CLASSIC_1XSheet_5
+  - first:
+      213: -969328301263546484
+    second: Plebes_CLASSIC_1XSheet_6
+  - first:
+      213: 6637631442246983814
+    second: Plebes_CLASSIC_1XSheet_7
+  - first:
+      213: -6942430240629758969
+    second: Plebes_CLASSIC_1XSheet_8
+  - first:
+      213: 4551733328871637524
+    second: Plebes_CLASSIC_1XSheet_9
+  - first:
+      213: 3025577163983958551
+    second: Plebes_CLASSIC_1XSheet_10
+  - first:
+      213: -4045565403889634666
+    second: Plebes_CLASSIC_1XSheet_11
+  - first:
+      213: 8163460461352678935
+    second: Plebes_CLASSIC_1XSheet_12
+  - first:
+      213: -1826312297856933739
+    second: Plebes_CLASSIC_1XSheet_13
+  - first:
+      213: 8013660372042083563
+    second: Plebes_CLASSIC_1XSheet_14
+  - first:
+      213: -7627377229328923518
+    second: Plebes_CLASSIC_1XSheet_15
+  - first:
+      213: 6088783798160785051
+    second: Plebes_CLASSIC_1XSheet_16
+  - first:
+      213: -3333758563119768236
+    second: Plebes_CLASSIC_1XSheet_17
+  - first:
+      213: -8299803133884439313
+    second: Plebes_CLASSIC_1XSheet_18
+  - first:
+      213: 4695405211367484284
+    second: Plebes_CLASSIC_1XSheet_19
+  - first:
+      213: -1684169334104395121
+    second: Plebes_CLASSIC_1XSheet_20
+  - first:
+      213: -4635047382746302237
+    second: Plebes_CLASSIC_1XSheet_21
+  - first:
+      213: 1247387874724938465
+    second: Plebes_CLASSIC_1XSheet_22
+  - first:
+      213: -8572789429255896711
+    second: Plebes_CLASSIC_1XSheet_23
+  - first:
+      213: 2306145630241970559
+    second: Plebes_CLASSIC_1XSheet_24
+  - first:
+      213: 5757896381651184079
+    second: Plebes_CLASSIC_1XSheet_25
+  - first:
+      213: 7427382310192895637
+    second: Plebes_CLASSIC_1XSheet_26
+  - first:
+      213: 1736440784294764657
+    second: Plebes_CLASSIC_1XSheet_27
+  - first:
+      213: 2962877183328343134
+    second: Plebes_CLASSIC_1XSheet_28
+  - first:
+      213: 5363063549308793821
+    second: Plebes_CLASSIC_1XSheet_29
+  - first:
+      213: 5881362862392651937
+    second: Plebes_CLASSIC_1XSheet_30
+  - first:
+      213: 3867626767546230578
+    second: Plebes_CLASSIC_1XSheet_31
+  - first:
+      213: 4705779752404521578
+    second: Plebes_CLASSIC_1XSheet_32
+  - first:
+      213: -2503136467944935017
+    second: Plebes_CLASSIC_1XSheet_33
+  - first:
+      213: 3663955973070934723
+    second: Plebes_CLASSIC_1XSheet_34
+  - first:
+      213: -5452936698140845626
+    second: Plebes_CLASSIC_1XSheet_35
+  - first:
+      213: 5956954344684575057
+    second: Plebes_CLASSIC_1XSheet_36
+  - first:
+      213: -3551430888678121166
+    second: Plebes_CLASSIC_1XSheet_37
+  - first:
+      213: -6590667501144839511
+    second: Plebes_CLASSIC_1XSheet_38
+  - first:
+      213: 8971489178173871246
+    second: Plebes_CLASSIC_1XSheet_39
+  - first:
+      213: -4678413519830595235
+    second: Plebes_CLASSIC_1XSheet_40
+  - first:
+      213: -3809117216281034313
+    second: Plebes_CLASSIC_1XSheet_41
+  - first:
+      213: 2939296616945404722
+    second: Plebes_CLASSIC_1XSheet_42
+  - first:
+      213: 6975088235560201951
+    second: Plebes_CLASSIC_1XSheet_43
+  - first:
+      213: -5304417672302796809
+    second: Plebes_CLASSIC_1XSheet_44
+  - first:
+      213: 1796337792273144158
+    second: Plebes_CLASSIC_1XSheet_45
+  - first:
+      213: -7648182898211643784
+    second: Plebes_CLASSIC_1XSheet_46
+  - first:
+      213: 8795531922327296936
+    second: Plebes_CLASSIC_1XSheet_47
+  - first:
+      213: 8085581504876294939
+    second: Plebes_CLASSIC_1XSheet_48
+  - first:
+      213: 4930155421356451462
+    second: Plebes_CLASSIC_1XSheet_49
+  - first:
+      213: 3454098156811283086
+    second: Plebes_CLASSIC_1XSheet_50
+  - first:
+      213: 6245628855873682408
+    second: Plebes_CLASSIC_1XSheet_51
+  - first:
+      213: -6868617099679743618
+    second: Plebes_CLASSIC_1XSheet_52
+  - first:
+      213: 8640367616463326996
+    second: Plebes_CLASSIC_1XSheet_53
+  - first:
+      213: 3430194315031762668
+    second: Plebes_CLASSIC_1XSheet_54
+  - first:
+      213: -8116433685379420386
+    second: Plebes_CLASSIC_1XSheet_55
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60d52a90e6e961830800000000000000
+      internalID: 4041591911056825606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3aa69d70481324e0800000000000000
+      internalID: -2007734343613109698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_2
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9642211bc792ad5c0800000000000000
+      internalID: -4189990887791385495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_3
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcab920e3a7e06f80800000000000000
+      internalID: -8115231837495117107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_4
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a79226e564287ca40800000000000000
+      internalID: 5388418717914900858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_5
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1705a962f5d73e1f0800000000000000
+      internalID: -1016831243232587663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_6
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c871474bb014c82f0800000000000000
+      internalID: -969328301263546484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_7
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 680681901aa9d1c50800000000000000
+      internalID: 6637631442246983814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_8
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 704655d8a7887af90800000000000000
+      internalID: -6942430240629758969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_9
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41243b3b8510b2f30800000000000000
+      internalID: 4551733328871637524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_10
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7123cc386620df920800000000000000
+      internalID: 3025577163983958551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_11
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6927c8113b34bd7c0800000000000000
+      internalID: -4045565403889634666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_12
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7167fd8a9007a4170800000000000000
+      internalID: 8163460461352678935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_13
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 378
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5906f4d24a2a7a6e0800000000000000
+      internalID: -1826312297856933739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bec613276ad363f60800000000000000
+      internalID: 8013660372042083563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_15
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28442fd42dc162690800000000000000
+      internalID: -7627377229328923518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_16
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9ef68bca94bf7450800000000000000
+      internalID: 6088783798160785051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_17
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45d5456ff3c1cb1d0800000000000000
+      internalID: -3333758563119768236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_18
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe4e423260d21dc80800000000000000
+      internalID: -8299803133884439313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_19
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7ba314992e692140800000000000000
+      internalID: 4695405211367484284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_20
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f82f91be9e0a0a8e0800000000000000
+      internalID: -1684169334104395121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_21
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e87d4286f00dafb0800000000000000
+      internalID: -4635047382746302237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_22
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e20c12c9ac9f4110800000000000000
+      internalID: 1247387874724938465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_23
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9718af64f65570980800000000000000
+      internalID: -8572789429255896711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_24
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7954e27b33110020800000000000000
+      internalID: 2306145630241970559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_25
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc963d1a04828ef40800000000000000
+      internalID: 5757896381651184079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_26
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5965112fbdc531760800000000000000
+      internalID: 7427382310192895637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_27
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 252
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 170e36971b3191810800000000000000
+      internalID: 1736440784294764657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e545569a9114e1920800000000000000
+      internalID: 2962877183328343134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_29
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd3756422ed6d6a40800000000000000
+      internalID: 5363063549308793821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_30
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a0b610dc5cce9150800000000000000
+      internalID: 5881362862392651937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_31
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 237a263bd029ca530800000000000000
+      internalID: 3867626767546230578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_32
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a621c45a0c94e4140800000000000000
+      internalID: 4705779752404521578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_33
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 791f0d305a2134dd0800000000000000
+      internalID: -2503136467944935017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_34
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c250978b8cf8d230800000000000000
+      internalID: 3663955973070934723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_35
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c99f94c6f64354b0800000000000000
+      internalID: -5452936698140845626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_36
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 159d42a4a6a5ba250800000000000000
+      internalID: 5956954344684575057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_37
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 231adfb4c68c6bec0800000000000000
+      internalID: -3551430888678121166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_38
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9aaec8993de3984a0800000000000000
+      internalID: -6590667501144839511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_39
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e849053efd1218c70800000000000000
+      internalID: 8971489178173871246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_40
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d59cc16e0bfe21fb0800000000000000
+      internalID: -4678413519830595235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_41
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 126
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b18eb7c21c432bc0800000000000000
+      internalID: -3809117216281034313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23bc98633ba7ac820800000000000000
+      internalID: 2939296616945404722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_43
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fde629d6bcd7cc060800000000000000
+      internalID: 6975088235560201951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_44
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ff56162b3ce266b0800000000000000
+      internalID: -5304417672302796809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_45
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e59dc0564bfdde810800000000000000
+      internalID: 1796337792273144158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_46
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87e90e60d223cd590800000000000000
+      internalID: -7648182898211643784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_47
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ab5de0cea1001a70800000000000000
+      internalID: 8795531922327296936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_48
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b13be981a81c53070800000000000000
+      internalID: 8085581504876294939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_49
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 686ea611c3e6b6440800000000000000
+      internalID: 4930155421356451462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_50
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8a611819fb6fef20800000000000000
+      internalID: 3454098156811283086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_51
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ebb7498a5eeca650800000000000000
+      internalID: 6245628855873682408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_52
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e714a6ba325cda0a0800000000000000
+      internalID: -6868617099679743618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_53
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41fc51c8190c8e770800000000000000
+      internalID: 8640367616463326996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_54
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce6580a3e8f7a9f20800000000000000
+      internalID: 3430194315031762668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plebes_CLASSIC_1XSheet_55
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 0
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1fe1fbd092ac5f80800000000000000
+      internalID: -8116433685379420386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
