@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameSelectionManager : MonoBehaviour {
@@ -13,6 +14,7 @@ public class GameSelectionManager : MonoBehaviour {
     public GameObject gamesGameObject;
     public GameObject panelOfPlayersGameObject;
     private bool justJoinedPlayerToMatch = false;
+    private bool loadGameScene = false;
     
     
     private void Start() {
@@ -31,6 +33,9 @@ public class GameSelectionManager : MonoBehaviour {
             for (var _i = 0; _i < GlobalInfo.otherPlayers.Count; _i++)
                 this.panelOfPlayersGameObject.transform.GetChild(2 + _i).gameObject.SetActive(true);
         }
+        
+        if (this.loadGameScene)
+            SceneManager.LoadScene("GameScene");
     }
 
     public void onClickBack() {
@@ -64,9 +69,11 @@ public class GameSelectionManager : MonoBehaviour {
 
                 // TODO 2. if currentNumOfPlayers == TypeOfGame NumOfPlayers => start game
                 if (GlobalInfo.otherPlayers.Count + 1 == typeOfGameToMaxPlayers(TypeOfGame.TEST)) {
-                    // TODO start game
+                    _response = ClientTCP.getResponseFromServer(true, "Matched started");
                     this.justJoinedPlayerToMatch = true;
+                    this.loadGameScene = true;
                     Debug.Log("The match starts!");
+                    return;
                 }
                 
                 // TODO 3. while currentNumOfPlayers < TypeOfGame NumOfPlayers
@@ -74,6 +81,11 @@ public class GameSelectionManager : MonoBehaviour {
                     //        TODO 4. Get response from server with currentNumOfPlayers.
                     _response = ClientTCP.getResponseFromServer(false, "Player has joined the match");
                     if (_response != Response.OK) {
+                        if (_response == Response.LOAD_MATCH_SCENE) {
+                            this.loadGameScene = true;
+                            return;
+                        }
+
                         // TODO Show modal window with error.
                         Debug.LogError($"There was a problem while adding the new player, answer: {_response}");
                         return;
@@ -85,7 +97,12 @@ public class GameSelectionManager : MonoBehaviour {
                     //        TODO 6. if currentNumOfPlayers == TypeOfGame NumOfPlayers => start game
                     if (GlobalInfo.otherPlayers.Count + 1 == typeOfGameToMaxPlayers(TypeOfGame.TEST)) {
                         // TODO start game
-                        Debug.Log("The match starts!");
+                        if (_response == Response.LOAD_MATCH_SCENE) {
+                            Debug.Log("This is the same as Got response: MATCH_START from Match Started");
+                            this.loadGameScene = true;
+                            return;
+                        }
+
                         break;
                     }
                 }

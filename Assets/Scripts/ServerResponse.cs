@@ -8,5 +8,6 @@
     EXPIRATION_TIME_ERROR               =  5,
     UNMATCH_APP_VERSION_ERROR           =  6,
     PLAYER_ALREADY_ONLINE_ERROR         =  7,
-    ADDED_TO_MATCH_QUEUE                =  8
+    ADDED_TO_MATCH_QUEUE                =  8,
+    LOAD_MATCH_SCENE                    =  9
 }

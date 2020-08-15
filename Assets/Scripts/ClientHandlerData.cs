@@ -15,6 +15,7 @@ public class ClientHandlerData {
         ClientHandlerData.packetListener.Add((int)ServerPckts.GET_PLAYER_INFO, handleGetPlayerInfo);
         ClientHandlerData.packetListener.Add((int)ServerPckts.ADDED_TO_MATCH, handleAddedToMatch);
         ClientHandlerData.packetListener.Add((int)ServerPckts.PLAYER_JOINED_MATCH, handlePlayerJoinedMatch);
+        ClientHandlerData.packetListener.Add((int)ServerPckts.MATCH_STARTS, handleMatchStarts);
     }
 
     public static Response handleData(byte[] _data) {
@@ -155,4 +156,16 @@ public class ClientHandlerData {
         
         return Response.OK;
     }
+
+    private static Response handleMatchStarts(byte[] _data) {
+        var _buffer = new ByteBuffer();
+        _buffer.writeBytes(_data);
+        var _packetId = _buffer.readInteger();
+
+        // None sense info.
+        _buffer.readShort();
+
+        return Response.LOAD_MATCH_SCENE;
+    }
+    
 }

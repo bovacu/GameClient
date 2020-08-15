@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - AccountManager
     - ClientManger
+    - GameManager
     - GameSelectionManager
     - LoadingScreenManager
     - PlayManager
@@ -34,6 +35,53 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
   sceneClasses:
+    Assets/Scenes/GameScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11170}
+    - Class: 114
+      Script: {instanceID: 11462}
+    - Class: 114
+      Script: {instanceID: 11516}
+    - Class: 114
+      Script: {instanceID: 12184}
+    - Class: 114
+      Script: {instanceID: 13662}
+    - Class: 114
+      Script: {instanceID: 14274}
+    - Class: 114
+      Script: {instanceID: 16146}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
     Assets/Scenes/LoadingScene.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -54,25 +102,25 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11172}
+      Script: {instanceID: 11170}
     - Class: 114
-      Script: {instanceID: 11464}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 12098}
+      Script: {instanceID: 12096}
     - Class: 114
-      Script: {instanceID: 12186}
+      Script: {instanceID: 12184}
     - Class: 114
-      Script: {instanceID: 12900}
+      Script: {instanceID: 12898}
     - Class: 114
-      Script: {instanceID: 13664}
+      Script: {instanceID: 13662}
     - Class: 114
-      Script: {instanceID: 13820}
+      Script: {instanceID: 13818}
     - Class: 114
-      Script: {instanceID: 14276}
+      Script: {instanceID: 14274}
     - Class: 114
-      Script: {instanceID: 14318}
+      Script: {instanceID: 14316}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -107,31 +155,31 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11172}
+      Script: {instanceID: 11170}
     - Class: 114
-      Script: {instanceID: 11464}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 12186}
+      Script: {instanceID: 12184}
     - Class: 114
-      Script: {instanceID: 12232}
+      Script: {instanceID: 12230}
     - Class: 114
-      Script: {instanceID: 12276}
+      Script: {instanceID: 12274}
     - Class: 114
-      Script: {instanceID: 12380}
+      Script: {instanceID: 12378}
     - Class: 114
-      Script: {instanceID: 12708}
+      Script: {instanceID: 12706}
     - Class: 114
-      Script: {instanceID: 12900}
+      Script: {instanceID: 12898}
     - Class: 114
-      Script: {instanceID: 13190}
+      Script: {instanceID: 13188}
     - Class: 114
-      Script: {instanceID: 13664}
+      Script: {instanceID: 13662}
     - Class: 114
-      Script: {instanceID: 14276}
+      Script: {instanceID: 14274}
     - Class: 114
-      Script: {instanceID: 14296}
+      Script: {instanceID: 14294}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -677,8 +725,15 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: ef5854a3ee22b4bffd70d82f00384e45
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameManager
   platform: 5
   scenePathNames:
   - Assets/Scenes/LoadingScene.unity
   - Assets/Scenes/MainMenu.unity
+  - Assets/Scenes/GameScene.unity
   playerPath: C:/Users/vazqu/Desktop/GameClient.exe
