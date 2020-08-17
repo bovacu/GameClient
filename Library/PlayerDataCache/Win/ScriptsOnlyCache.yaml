@@ -29,6 +29,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
     - UnityEngine.UI.InputField
     - UnityEngine.UI.Slider
@@ -53,19 +54,19 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11170}
+      Script: {instanceID: 11174}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11466}
     - Class: 114
-      Script: {instanceID: 11516}
+      Script: {instanceID: 11520}
     - Class: 114
-      Script: {instanceID: 12184}
+      Script: {instanceID: 11600}
     - Class: 114
-      Script: {instanceID: 13662}
+      Script: {instanceID: 12190}
     - Class: 114
-      Script: {instanceID: 14274}
+      Script: {instanceID: 13670}
     - Class: 114
-      Script: {instanceID: 16146}
+      Script: {instanceID: 14282}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -73,6 +74,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -102,25 +105,25 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11170}
+      Script: {instanceID: 11174}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11466}
     - Class: 114
-      Script: {instanceID: 11516}
+      Script: {instanceID: 11520}
     - Class: 114
-      Script: {instanceID: 12096}
+      Script: {instanceID: 12102}
     - Class: 114
-      Script: {instanceID: 12184}
+      Script: {instanceID: 12190}
     - Class: 114
-      Script: {instanceID: 12898}
+      Script: {instanceID: 12906}
     - Class: 114
-      Script: {instanceID: 13662}
+      Script: {instanceID: 13670}
     - Class: 114
-      Script: {instanceID: 13818}
+      Script: {instanceID: 13826}
     - Class: 114
-      Script: {instanceID: 14274}
+      Script: {instanceID: 14282}
     - Class: 114
-      Script: {instanceID: 14316}
+      Script: {instanceID: 14324}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -155,31 +158,31 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11170}
+      Script: {instanceID: 11174}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11466}
     - Class: 114
-      Script: {instanceID: 11516}
+      Script: {instanceID: 11520}
     - Class: 114
-      Script: {instanceID: 12184}
+      Script: {instanceID: 12190}
     - Class: 114
-      Script: {instanceID: 12230}
+      Script: {instanceID: 12236}
     - Class: 114
-      Script: {instanceID: 12274}
+      Script: {instanceID: 12282}
     - Class: 114
-      Script: {instanceID: 12378}
+      Script: {instanceID: 12386}
     - Class: 114
-      Script: {instanceID: 12706}
+      Script: {instanceID: 12714}
     - Class: 114
-      Script: {instanceID: 12898}
+      Script: {instanceID: 12906}
     - Class: 114
-      Script: {instanceID: 13188}
+      Script: {instanceID: 13196}
     - Class: 114
-      Script: {instanceID: 13662}
+      Script: {instanceID: 13670}
     - Class: 114
-      Script: {instanceID: 14274}
+      Script: {instanceID: 14282}
     - Class: 114
-      Script: {instanceID: 14294}
+      Script: {instanceID: 14302}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -187,6 +190,57 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/TwoPlayersGameScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11174}
+    - Class: 114
+      Script: {instanceID: 11466}
+    - Class: 114
+      Script: {instanceID: 11520}
+    - Class: 114
+      Script: {instanceID: 11600}
+    - Class: 114
+      Script: {instanceID: 12190}
+    - Class: 114
+      Script: {instanceID: 13248}
+    - Class: 114
+      Script: {instanceID: 13670}
+    - Class: 114
+      Script: {instanceID: 14282}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -293,6 +347,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_InputField
+  - hash:
+      serializedVersion: 2
+      Hash: 6c3de256a230026aaba54914ecffbe03
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameManager
   - hash:
       serializedVersion: 2
       Hash: 7ab0e790220bdca831fdd886b339039d
@@ -721,19 +781,20 @@ ScriptsOnlyBuild:
     className: ToggleGroup
   - hash:
       serializedVersion: 2
+      Hash: e8703d877400232c6863bbe828df4d56
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AugmentImage
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: ef5854a3ee22b4bffd70d82f00384e45
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GameManager
   platform: 5
   scenePathNames:
   - Assets/Scenes/LoadingScene.unity
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/GameScene.unity
+  - Assets/Scenes/TwoPlayersGameScene.unity
   playerPath: C:/Users/vazqu/Desktop/GameClient.exe

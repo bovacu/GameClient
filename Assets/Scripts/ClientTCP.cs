@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Sockets;
 using UnityEngine;
 using System.Threading.Tasks;
@@ -10,25 +12,26 @@ using Debug = UnityEngine.Debug;
 public class ClientTCP {
     private const float EXPIRATION_TIME = 10.0f;
     private const int MAX_BUFFER_SIZE = 4096;
-    private static volatile bool canGetResponse = false;
-    private static Response serverResponse = Response.NONE_RESPONSE;
+    private static Queue<Response> responses;
 
     private static TcpClient clientSocket;
     private static NetworkStream inOutStream;
     private static byte[] buffer;
 
     private static UnityThread thread;
+    
+    private delegate object waiter();
 
     public static void initClientSocket(String _address, int _port) {
         ClientTCP.clientSocket = new TcpClient();
         ClientTCP.clientSocket.ReceiveBufferSize = MAX_BUFFER_SIZE;
         ClientTCP.clientSocket.SendBufferSize = MAX_BUFFER_SIZE;
+        responses = new Queue<Response>();
 
         // Because we are sending and receiving at the same time over the same stream.
         ClientTCP.buffer = new byte[MAX_BUFFER_SIZE * 2];
 
         ClientTCP.clientSocket.BeginConnect(_address, _port, new AsyncCallback(onClientConnect), ClientTCP.clientSocket);
-        
     }
 
     public static bool isConnectionActive() {
@@ -47,51 +50,58 @@ public class ClientTCP {
 
     public static Response getResponseFromServer(bool _hasExpirationTime = true, string _debugging = "") {
 
-        var _t = new Thread(() => {
-            DateTime _start = DateTime.Now;
+        // var _t = new waiter(() => {
+        //     DateTime _start = DateTime.Now;
+        //
+        //     if (_hasExpirationTime) {
+        //         while (((DateTime.Now - _start).TotalMilliseconds / 1000f) < 5f && responses.Count == 0) { }
+        //
+        //         if (((DateTime.Now - _start).TotalMilliseconds / 1000f) <= 5f) {
+        //             return responses.Dequeue();
+        //         }
+        //
+        //         if (_debugging.Length != 0)
+        //             Debug.Log($"There was an expiration time for: {_debugging}");
+        //
+        //         return Response.EXPIRATION_TIME_ERROR;
+        //     } else {
+        //         while (responses.Count == 0) { }
+        //
+        //         return responses.Dequeue();
+        //     }
+        // });
+        //
+        // try {
+        //     serverResponse = responses.Dequeue();
+        //     
+        //     if(_debugging.Length != 0)
+        //         Debug.Log($"Got a response {serverResponse} from: {_debugging}");
+        //
+        //     return serverResponse;
+        // }
+        // catch (Exception) {
+        //     var _asyncResult = _t.BeginInvoke(null, null);
+        //     return (Response)_t.EndInvoke(_asyncResult);
+        // }
 
-            while (((DateTime.Now - _start).TotalMilliseconds / 1000f) < 5f && !canGetResponse) { }
-            
-            if (((DateTime.Now - _start).TotalMilliseconds / 1000f) <= 5f) return;
-            
-            if(_debugging.Length != 0)
-                Debug.Log($"There was an expiration time for: {_debugging}");
-            
-            serverResponse = Response.EXPIRATION_TIME_ERROR;
-            
-            // This is to unlock the while below
-            canGetResponse = true;
-
-        });
+        while (responses.Count == 0) { }
         
-        if(_hasExpirationTime)
-            _t.Start();
-        
-        while (!canGetResponse) {  }
-
-        if(_hasExpirationTime)
-            while(_t.IsAlive) {}
-        
-        if(_debugging.Length != 0)
-            Debug.Log($"Got a response {serverResponse} from: {_debugging}");
-        
-        canGetResponse = false;
-        return serverResponse;
+        return responses.Dequeue();
     }
 
     private static void onReceive(IAsyncResult _result) {
         try {
-            int _bytesRead = ClientTCP.inOutStream.EndRead(_result);
+            var _bytesRead = ClientTCP.inOutStream.EndRead(_result);
 
             if (_bytesRead <= 0) 
                 return;
 
-            byte[] _newData = new byte[_bytesRead];
+            var _newData = new byte[_bytesRead];
             Buffer.BlockCopy(ClientTCP.buffer, 0, _newData, 0, _bytesRead);
-
-            canGetResponse = false;
-            ClientTCP.serverResponse = ClientHandlerData.handleData(_newData);
-            canGetResponse = true;
+            
+            var _response = ClientHandlerData.handleData(_newData);
+            if (_response != Response.PLAYER_JOINED_MATCH)
+                responses.Enqueue(_response);
 
             ClientTCP.inOutStream.BeginRead(ClientTCP.buffer, 0, MAX_BUFFER_SIZE * 2, onReceive, null);
         }

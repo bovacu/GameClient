@@ -123,9 +123,7 @@ public class ClientHandlerData {
         var _packetId = _buffer.readInteger();
 
         var _numberOfPlayers = _buffer.readInteger();
-        
-        Debug.Log($"You have been added to a match with {_numberOfPlayers} players");
-        
+
         var _playersIds = new List<int>();
         for(var _i = 0; _i < _numberOfPlayers; _i++)
             _playersIds.Add(_buffer.readInteger());
@@ -134,10 +132,8 @@ public class ClientHandlerData {
         for(var _i = 0; _i < _numberOfPlayers; _i++)
             _playersNames.Add(_buffer.readString());
 
-        for (var _i = 0; _i < _numberOfPlayers; _i++) {
+        for (var _i = 0; _i < _numberOfPlayers; _i++)
             GlobalInfo.otherPlayers.Add(new GlobalInfo.OtherPlayer(_playersIds[_i], _playersNames[_i]));
-            Debug.Log($"Player { _playersNames[_i]} was already in party.");
-        }
 
         GlobalInfo.playerInfo.matchId = _buffer.readInteger();
         GlobalInfo.playerInfo.inMatch = true;
@@ -152,11 +148,11 @@ public class ClientHandlerData {
 
         var _playerId = _buffer.readInteger();
         var _playerName = _buffer.readString();
-        Debug.Log($"Player {_playerName}has been added to the match.");
+        Debug.Log($"Player {_playerName} has been added to the match.");
         
         GlobalInfo.otherPlayers.Add(new GlobalInfo.OtherPlayer(_playerId, _playerName));
         
-        return Response.OK;
+        return Response.PLAYER_JOINED_MATCH;
     }
 
     private static Response handleMatchStarts(byte[] _data) {
@@ -176,7 +172,7 @@ public class ClientHandlerData {
         var _packetId = _buffer.readInteger();
         var _value = _buffer.readInteger();
         var _suit = (Suit) _buffer.readInteger();
-        var _card = new Card(_value, _suit);
+        var _card = new CardInfo(_value, _suit);
         Debug.Log($"{_value} of {_suit}");
 
         return Response.OK;
@@ -188,16 +184,14 @@ public class ClientHandlerData {
         var _packetId = _buffer.readInteger();
 
         var _numberOfCards = _buffer.readInteger();
-        var _cardList = new List<Card>();
-        
+
         for (var _i = 0; _i < _numberOfCards; _i++) {
             var _value = _buffer.readInteger();
             var _suit = (Suit) _buffer.readInteger();
-            _cardList.Add(new Card(_value, _suit));
-            Debug.Log($"{_value} of {_suit}");
+            GlobalInfo.playerCards.Add(new CardInfo(_value, _suit));
         }
         
-        return Response.OK;
+        return Response.RECEIVED_CARD_LIST;
     }
     
 }

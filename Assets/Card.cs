@@ -1,0 +1,14 @@
+﻿
+using UnityEngine;
+
+public enum Suit { OROS = 0, COPAS = 1, ESPADAS = 2, BASTOS = 3 }
+
+public struct CardInfo {
+    public int Value;
+    public Suit Suit;
+
+    public CardInfo(int _value, Suit _suit) {
+        this.Value = _value;
+        this.Suit = _suit;
+    }
+}

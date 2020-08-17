@@ -17,7 +17,7 @@ public static class GlobalInfo {
         public bool inMatch;
         public int matchId;
     }
-    
+
     public struct OtherPlayer {
         public string UserName { get; }
         public int Id  { get; }
@@ -41,6 +41,7 @@ public static class GlobalInfo {
     private static Thread loadingThread;
 
     public static List<OtherPlayer> otherPlayers;
+    public static List<CardInfo> playerCards;
 
     // Tasks to load.
     // 1. Connect to the server. (50%)
@@ -67,6 +68,7 @@ public static class GlobalInfo {
         ClientTCP.getResponseFromServer(true, "Welcome response");
         GlobalInfo.loadingProgress += 33;
         GlobalInfo.otherPlayers = new List<OtherPlayer>();
+        GlobalInfo.playerCards = new List<CardInfo>();
 
         ClientTCP.sendPacketAppVersion();
         Response _response = ClientTCP.getResponseFromServer(true, "App version");
