@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - AccountManager
+    - CardController
     - ClientManger
     - GameManager
     - GameSelectionManager
@@ -54,19 +55,19 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11174}
+      Script: {instanceID: 11170}
     - Class: 114
-      Script: {instanceID: 11466}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11520}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 11600}
+      Script: {instanceID: 11596}
     - Class: 114
-      Script: {instanceID: 12190}
+      Script: {instanceID: 12186}
     - Class: 114
-      Script: {instanceID: 13670}
+      Script: {instanceID: 13666}
     - Class: 114
-      Script: {instanceID: 14282}
+      Script: {instanceID: 14278}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -105,25 +106,25 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11174}
+      Script: {instanceID: 11170}
     - Class: 114
-      Script: {instanceID: 11466}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11520}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 12102}
+      Script: {instanceID: 12098}
     - Class: 114
-      Script: {instanceID: 12190}
+      Script: {instanceID: 12186}
     - Class: 114
-      Script: {instanceID: 12906}
+      Script: {instanceID: 12902}
     - Class: 114
-      Script: {instanceID: 13670}
+      Script: {instanceID: 13666}
     - Class: 114
-      Script: {instanceID: 13826}
+      Script: {instanceID: 13822}
     - Class: 114
-      Script: {instanceID: 14282}
+      Script: {instanceID: 14278}
     - Class: 114
-      Script: {instanceID: 14324}
+      Script: {instanceID: 14320}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -158,31 +159,31 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11174}
+      Script: {instanceID: 11170}
     - Class: 114
-      Script: {instanceID: 11466}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11520}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 12190}
+      Script: {instanceID: 12186}
     - Class: 114
-      Script: {instanceID: 12236}
+      Script: {instanceID: 12232}
     - Class: 114
-      Script: {instanceID: 12282}
+      Script: {instanceID: 12278}
     - Class: 114
-      Script: {instanceID: 12386}
+      Script: {instanceID: 12382}
     - Class: 114
-      Script: {instanceID: 12714}
+      Script: {instanceID: 12710}
     - Class: 114
-      Script: {instanceID: 12906}
+      Script: {instanceID: 12902}
     - Class: 114
-      Script: {instanceID: 13196}
+      Script: {instanceID: 13192}
     - Class: 114
-      Script: {instanceID: 13670}
+      Script: {instanceID: 13666}
     - Class: 114
-      Script: {instanceID: 14282}
+      Script: {instanceID: 14278}
     - Class: 114
-      Script: {instanceID: 14302}
+      Script: {instanceID: 14298}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -212,26 +213,32 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11174}
+      Script: {instanceID: 11170}
     - Class: 114
-      Script: {instanceID: 11466}
+      Script: {instanceID: 11462}
     - Class: 114
-      Script: {instanceID: 11520}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 11600}
+      Script: {instanceID: 11596}
     - Class: 114
-      Script: {instanceID: 12190}
+      Script: {instanceID: 12186}
     - Class: 114
-      Script: {instanceID: 13248}
+      Script: {instanceID: 12902}
     - Class: 114
-      Script: {instanceID: 13670}
+      Script: {instanceID: 13244}
     - Class: 114
-      Script: {instanceID: 14282}
+      Script: {instanceID: 13666}
+    - Class: 114
+      Script: {instanceID: 14278}
+    - Class: 114
+      Script: {instanceID: 14370}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -349,7 +356,7 @@ ScriptsOnlyBuild:
     className: TMP_InputField
   - hash:
       serializedVersion: 2
-      Hash: 6c3de256a230026aaba54914ecffbe03
+      Hash: 62f843f0e95c6bd66f00a9c5bc19a639
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -781,10 +788,10 @@ ScriptsOnlyBuild:
     className: ToggleGroup
   - hash:
       serializedVersion: 2
-      Hash: e8703d877400232c6863bbe828df4d56
+      Hash: 74cd70a4f96d8724772e7085054455d7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: AugmentImage
+    className: CardController
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb

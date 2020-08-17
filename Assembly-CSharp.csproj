@@ -59,8 +59,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\AccountManager.cs" />
-     <Compile Include="Assets\AugmentImage.cs" />
      <Compile Include="Assets\Card.cs" />
+     <Compile Include="Assets\CardController.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\GameSelectionManager.cs" />
      <Compile Include="Assets\LoadingScreenManager.cs" />

@@ -20,13 +20,13 @@ public class GameManager : MonoBehaviour {
     public Text[] otherPlayersNames;
     
     private GameObject hand;
-    public GameObject cardPrefab;
+    public GameObject cardPrefab, enemyCardPrefab;
     public Texture2D cardDeck;
     public Sprite[] sprites;
     
     private void Start()  {
         var _response = ClientTCP.getResponseFromServer(true, "Matched started");
-        if(_response != Response.RECEIVED_CARD_LIST)
+        if(_response == Response.LOAD_MATCH_SCENE)
             ClientTCP.getResponseFromServer(true, "Getting cards");
         
         this.hand = GameObject.Find("Hand");
@@ -36,8 +36,12 @@ public class GameManager : MonoBehaviour {
         
         for (var _i = 0; _i < GlobalInfo.playerCards.Count; _i++) {
             var _card = Instantiate(this.cardPrefab, new Vector3(), Quaternion.identity);
-            var _spriteChild = _card.transform.GetChild(0).gameObject;
             
+            var _script = _card.GetComponent<CardController>();
+            _script.Value = GlobalInfo.playerCards[_i].Value;
+            _script.Suit = GlobalInfo.playerCards[_i].Suit;
+
+            var _spriteChild = _card.transform.GetChild(0).gameObject;
             _spriteChild.GetComponent<SpriteRenderer>().sprite = this.getCardSprite(GlobalInfo.playerCards[_i].Value, GlobalInfo.playerCards[_i].Suit);
             _card.transform.SetParent(this.hand.transform);
             var _rectTransform = _card.GetComponent<RectTransform>();
@@ -50,10 +54,7 @@ public class GameManager : MonoBehaviour {
         _enemyHand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[GlobalInfo.playerCards.Count];
         
         for (var _i = 0; _i < GlobalInfo.playerCards.Count; _i++) {
-            var _card = Instantiate(this.cardPrefab, new Vector3(), Quaternion.identity);
-            var _spriteChild = _card.transform.GetChild(0).gameObject;
-            
-            _spriteChild.GetComponent<SpriteRenderer>().sprite = this.sprites[10];
+            var _card = Instantiate(this.enemyCardPrefab, new Vector3(), Quaternion.identity);
             _card.transform.SetParent(_enemyHand.transform);
             var _rectTransform = _card.GetComponent<RectTransform>();
             _rectTransform.localScale = new Vector3(0.75f, 0.75f, 1f);

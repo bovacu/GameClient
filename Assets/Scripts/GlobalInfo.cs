@@ -150,4 +150,12 @@ public static class GlobalInfo {
         if(GlobalInfo.loadingThread.IsAlive)
             GlobalInfo.loadingThread.Interrupt();
     }
+
+    public static CardInfo getCard(int _value, Suit _suit) {
+        for(var _i = 0; _i < playerCards.Count; _i++)
+            if (playerCards[_i].Value == _value && playerCards[_i].Suit == _suit)
+                return playerCards[_i];
+
+        return new CardInfo(-1, (Suit)10);
+    }
 }
