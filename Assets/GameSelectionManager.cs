@@ -15,6 +15,8 @@ public class GameSelectionManager : MonoBehaviour {
     public GameObject panelOfPlayersGameObject;
     private bool justJoinedPlayerToMatch = false;
     private bool loadGameScene = false;
+
+    public GameObject modalWindow;
     
     
     private void Start() {
@@ -35,6 +37,7 @@ public class GameSelectionManager : MonoBehaviour {
             this.panelOfPlayersGameObject.transform.GetChild(2 + _i).gameObject.SetActive(true);
 
         if (this.loadGameScene) {
+            Debug.Log("Loading scene");
             SceneManager.LoadScene("TwoPlayersGameScene");
         }
     }
@@ -47,38 +50,47 @@ public class GameSelectionManager : MonoBehaviour {
     public void onClickPlayTest() {
         if (!this.alreadySelectedGame) {
             this.alreadySelectedGame = true;
+            Debug.Log("Send packet to search a match.");
             ClientTCP.sendPacketSearchMatch(TypeOfGame.TEST);
             this.gamesGameObject.SetActive(false);
             this.loading_Text.gameObject.SetActive(true);
             
             // Waiting for response.
+            Debug.Log("Handling search match.");
             var _response = ClientTCP.getResponseFromServer(false, "Search match");
+            Debug.Log($"Finished handling added to match queue with response {_response}.");
             if (_response != Response.ADDED_TO_MATCH_QUEUE) {
                 // TODO Show modal window with error.
                 Debug.LogError($"Couldn't add to the queue. Error: {_response}");
             }
             
+            Debug.Log("Handling add to match.");
             _response = ClientTCP.getResponseFromServer(false, "Joined match");
-            if (_response != Response.OK && _response != Response.ADDED_TO_MATCH_QUEUE) {
-                if (_response == Response.LOAD_MATCH_SCENE) {
-                    this.loadGameScene = true;
-                    return;
-                }
+            Debug.Log($"Finished handling added to match with response {_response}.");
+            
+            if (_response != Response.ADDED_TO_MATCH) {
                 Debug.LogError($"Couldn't add to a match. Error: {_response}");
-                return;
             }
 
-            // TODO 2. if currentNumOfPlayers == TypeOfGame NumOfPlayers => start game
-            if (GlobalInfo.otherPlayers.Count + 1 == typeOfGameToMaxPlayers(TypeOfGame.TEST)) {
-                this.justJoinedPlayerToMatch = true;
-                this.loadGameScene = true;
-                Debug.Log("The match starts!");
-            }
-            
         } else {
             // TODO Show modal window with error.
         }
         
+    }
+
+    public void onClickMus() {
+        this.modalWindow.SetActive(true);
+        this.modalWindow.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = this.modalWindow.transform.parent.GetComponent<RectTransform>().sizeDelta;
+        this.modalWindow.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = "For now only test is playable.";
+        this.modalWindow.transform.GetChild(1).transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text =
+            "Non implemented game.";
+    }
+
+    public void onClickComeMierda() {
+        this.modalWindow.SetActive(true);
+        this.modalWindow.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = "For now only test is playable.";
+        this.modalWindow.transform.GetChild(1).transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text =
+            "Non implemented game.";
     }
     
     private int typeOfGameToMaxPlayers(TypeOfGame _typeOfGame) {

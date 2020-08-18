@@ -18,6 +18,7 @@ public class ClientHandlerData {
         ClientHandlerData.packetListener.Add((int)ServerPckts.MATCH_STARTS, handleMatchStarts);
         ClientHandlerData.packetListener.Add((int)ServerPckts.SENDING_CARD, handleReceivingCard);
         ClientHandlerData.packetListener.Add((int)ServerPckts.SENDING_LIST_CARDS, handleReceivingCardList);
+        ClientHandlerData.packetListener.Add((int)ServerPckts.CARDS_PER_PLAYER_AND_INITIAL_TURN, handleCardsPerPlayerAndInitialTurn);
     }
 
     public static Response handleData(byte[] _data) {
@@ -86,8 +87,9 @@ public class ClientHandlerData {
 
         int _pcktId = _buffer.readInteger();
         string _msg = _buffer.readString();
+        GlobalInfo.playerInfo.id = _buffer.readInteger();
 
-        Debug.Log("Correclty connected to the server");
+        Debug.Log($"Correclty connected to the server with id {GlobalInfo.playerInfo.id}");
         return Response.OK;
     }
 
@@ -137,8 +139,8 @@ public class ClientHandlerData {
 
         GlobalInfo.playerInfo.matchId = _buffer.readInteger();
         GlobalInfo.playerInfo.inMatch = true;
-        
-        return Response.OK;
+
+        return Response.ADDED_TO_MATCH;
     }
 
     private static Response handlePlayerJoinedMatch(byte[] _data) {
@@ -148,8 +150,7 @@ public class ClientHandlerData {
 
         var _playerId = _buffer.readInteger();
         var _playerName = _buffer.readString();
-        Debug.Log($"Player {_playerName} has been added to the match.");
-        
+
         GlobalInfo.otherPlayers.Add(new GlobalInfo.OtherPlayer(_playerId, _playerName));
         
         return Response.PLAYER_JOINED_MATCH;
@@ -161,12 +162,13 @@ public class ClientHandlerData {
         var _packetId = _buffer.readInteger();
 
         // None sense info.
-        _buffer.readShort();
-
+        _buffer.readString();
+        
         return Response.LOAD_MATCH_SCENE;
     }
 
     private static Response handleReceivingCard(byte[] _data) {
+        Debug.LogError("NOT YET IMPLEMENTED CORRECTLY");
         var _buffer = new ByteBuffer();
         _buffer.writeBytes(_data);
         var _packetId = _buffer.readInteger();
@@ -190,8 +192,25 @@ public class ClientHandlerData {
             var _suit = (Suit) _buffer.readInteger();
             GlobalInfo.playerCards.Add(new CardInfo(_value, _suit));
         }
-        
+
         return Response.RECEIVED_CARD_LIST;
+    }
+
+    private static Response handleCardsPerPlayerAndInitialTurn(byte[] _data) {
+        var _buffer = new ByteBuffer();
+        _buffer.writeBytes(_data);
+        var _packetId = _buffer.readInteger();
+
+        for (var _i = 0; _i < GlobalInfo.otherPlayers.Count; _i++) {
+            var _playerId = _buffer.readInteger();
+            var _numberOfCards = _buffer.readInteger();
+            GlobalInfo.otherPlayersCardCount.Add(_playerId, _numberOfCards);
+        }
+
+        var _turn = _buffer.readInteger();
+        GlobalInfo.isMyTurn = GlobalInfo.playerInfo.id == _turn;
+
+        return Response.RECEIVED_CARDS_PER_PLAYER_AND_TURN;
     }
     
 }

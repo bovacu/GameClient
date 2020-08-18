@@ -77,7 +77,6 @@
      <Compile Include="Assets\Scripts\ServerResponse.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\UnityThread.cs" />
-     <None Include="Assets\Resources\inGame.txt" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/vazqu/Documents/GameDev/Unity/GameClient/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

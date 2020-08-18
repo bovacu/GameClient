@@ -1,4 +1,0 @@
-remember=1
-password=c
-appVersion=1.0
-userName=carlos

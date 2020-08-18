@@ -7,6 +7,8 @@ using UnityEngine;
 public static class GlobalInfo {
 
     public struct PlayerInfo {
+        public int id;
+        
         public string userName;
         public string password;
         public int currencyAmount;
@@ -41,7 +43,10 @@ public static class GlobalInfo {
     private static Thread loadingThread;
 
     public static List<OtherPlayer> otherPlayers;
+    public static Dictionary<int, int> otherPlayersCardCount;
     public static List<CardInfo> playerCards;
+
+    public static bool isMyTurn = false;
 
     // Tasks to load.
     // 1. Connect to the server. (50%)
@@ -69,6 +74,7 @@ public static class GlobalInfo {
         GlobalInfo.loadingProgress += 33;
         GlobalInfo.otherPlayers = new List<OtherPlayer>();
         GlobalInfo.playerCards = new List<CardInfo>();
+        GlobalInfo.otherPlayersCardCount = new Dictionary<int, int>();
 
         ClientTCP.sendPacketAppVersion();
         Response _response = ClientTCP.getResponseFromServer(true, "App version");

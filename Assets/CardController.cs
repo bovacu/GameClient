@@ -12,7 +12,6 @@ public class CardController : MonoBehaviour  {
 
     private void Start() {
         initialZ = child.GetComponent<RectTransform>().localPosition.z;
-        Debug.Log($"initialz: {initialZ}");
     }
 
     private void Update() {

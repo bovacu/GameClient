@@ -18,20 +18,28 @@ public class GameManager : MonoBehaviour {
     public Image background;
     public GameObject canvas;
     public Text[] otherPlayersNames;
+
+    public Text myTurnText;
     
     private GameObject hand;
     public GameObject cardPrefab, enemyCardPrefab;
     public Texture2D cardDeck;
     public Sprite[] sprites;
+
+    public Button playCardButton;
     
     private void Start()  {
+        Debug.Log("Handling match starting.");
         var _response = ClientTCP.getResponseFromServer(true, "Matched started");
-        if(_response == Response.LOAD_MATCH_SCENE)
-            ClientTCP.getResponseFromServer(true, "Getting cards");
-        
+        Debug.Log($"Handled match started with response {_response}.");
+        if (_response == Response.LOAD_MATCH_SCENE) {
+            Debug.Log("Handling getting cards.");
+            _response = ClientTCP.getResponseFromServer(true, "Getting cards");
+            Debug.Log($"Handled got cards with response {_response}.");
+        }
+
         this.hand = GameObject.Find("Hand");
         this.sprites = Resources.LoadAll<Sprite>(this.cardDeck.name);
-        Debug.Log(GlobalInfo.playerCards.Count);
         this.hand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[GlobalInfo.playerCards.Count];
         
         for (var _i = 0; _i < GlobalInfo.playerCards.Count; _i++) {
@@ -50,21 +58,31 @@ public class GameManager : MonoBehaviour {
             _position.Set(_position.x, _position.y, -_i);
         }
 
+        
+        Debug.Log("Handling getting cards per player per turn.");
+        _response = ClientTCP.getResponseFromServer(true, "Cards per player per turn");
+        Debug.Log($"Handled got cards per player per turn with response {_response}.");
+
         var _enemyHand = GameObject.Find("EnemyHand1");
         _enemyHand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[GlobalInfo.playerCards.Count];
-        
-        for (var _i = 0; _i < GlobalInfo.playerCards.Count; _i++) {
-            var _card = Instantiate(this.enemyCardPrefab, new Vector3(), Quaternion.identity);
-            _card.transform.SetParent(_enemyHand.transform);
-            var _rectTransform = _card.GetComponent<RectTransform>();
-            _rectTransform.localScale = new Vector3(0.75f, 0.75f, 1f);
-            var _position = _rectTransform.position;
-            _position.Set(_position.x, _position.y, -_i);
+
+        foreach (var _player in GlobalInfo.otherPlayersCardCount) {
+            for (var _i = 0; _i < _player.Value; _i++) {
+                var _card = Instantiate(this.enemyCardPrefab, new Vector3(), Quaternion.identity);
+                _card.transform.SetParent(_enemyHand.transform);
+                var _rectTransform = _card.GetComponent<RectTransform>();
+                _rectTransform.localScale = new Vector3(0.75f, 0.75f, 1f);
+                var _position = _rectTransform.position;
+                _position.Set(_position.x, _position.y, -_i);
+            }
         }
         
         this.background.GetComponent<RectTransform>().sizeDelta = this.canvas.GetComponent<RectTransform>().sizeDelta;
         for (var _i = 0; _i < GlobalInfo.otherPlayers.Count; _i++)
             this.otherPlayersNames[_i].text = GlobalInfo.otherPlayers[_i].UserName;
+        
+        this.myTurnText.gameObject.SetActive(GlobalInfo.isMyTurn);
+        this.playCardButton.enabled = GlobalInfo.isMyTurn;
     }
     
     private void Update() {

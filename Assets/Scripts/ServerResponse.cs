@@ -11,5 +11,7 @@
     ADDED_TO_MATCH_QUEUE                =  8,
     LOAD_MATCH_SCENE                    =  9,
     PLAYER_JOINED_MATCH                 = 10,
-    RECEIVED_CARD_LIST                  = 11
+    RECEIVED_CARD_LIST                  = 11,
+    RECEIVED_CARDS_PER_PLAYER_AND_TURN  = 12,
+    ADDED_TO_MATCH                      = 13
 }

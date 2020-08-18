@@ -1,12 +1,13 @@
 ﻿public enum ServerPckts {
-    WELCOME_MSG         = 1,
-    SERVER_RESPONSE     = 2,
-    GET_PLAYER_INFO     = 3,
-    ADDED_TO_MATCH      = 4,
-    PLAYER_JOINED_MATCH = 5,
-    MATCH_STARTS        = 6,
-    SENDING_CARD        = 7,
-    SENDING_LIST_CARDS  = 8
+    WELCOME_MSG                         = 1,
+    SERVER_RESPONSE                     = 2,
+    GET_PLAYER_INFO                     = 3,
+    ADDED_TO_MATCH                      = 4,
+    PLAYER_JOINED_MATCH                 = 5,
+    MATCH_STARTS                        = 6,
+    SENDING_CARD                        = 7,
+    SENDING_LIST_CARDS                  = 8,
+    CARDS_PER_PLAYER_AND_INITIAL_TURN   = 9
 }
 
 public enum ClientPckts {

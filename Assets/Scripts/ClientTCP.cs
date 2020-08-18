@@ -11,8 +11,8 @@ using Debug = UnityEngine.Debug;
 
 public class ClientTCP {
     private const float EXPIRATION_TIME = 10.0f;
-    private const int MAX_BUFFER_SIZE = 4096;
-    private static Queue<Response> responses;
+    private const int MAX_BUFFER_SIZE = 8192;
+    private static volatile Queue<Response> responses;
 
     private static TcpClient clientSocket;
     private static NetworkStream inOutStream;
@@ -50,43 +50,43 @@ public class ClientTCP {
 
     public static Response getResponseFromServer(bool _hasExpirationTime = true, string _debugging = "") {
 
-        // var _t = new waiter(() => {
-        //     DateTime _start = DateTime.Now;
-        //
-        //     if (_hasExpirationTime) {
-        //         while (((DateTime.Now - _start).TotalMilliseconds / 1000f) < 5f && responses.Count == 0) { }
-        //
-        //         if (((DateTime.Now - _start).TotalMilliseconds / 1000f) <= 5f) {
-        //             return responses.Dequeue();
-        //         }
-        //
-        //         if (_debugging.Length != 0)
-        //             Debug.Log($"There was an expiration time for: {_debugging}");
-        //
-        //         return Response.EXPIRATION_TIME_ERROR;
-        //     } else {
-        //         while (responses.Count == 0) { }
-        //
-        //         return responses.Dequeue();
-        //     }
-        // });
-        //
-        // try {
-        //     serverResponse = responses.Dequeue();
-        //     
-        //     if(_debugging.Length != 0)
-        //         Debug.Log($"Got a response {serverResponse} from: {_debugging}");
-        //
-        //     return serverResponse;
-        // }
-        // catch (Exception) {
-        //     var _asyncResult = _t.BeginInvoke(null, null);
-        //     return (Response)_t.EndInvoke(_asyncResult);
-        // }
-
-        while (responses.Count == 0) { }
+        var _t = new waiter(() => {
+            DateTime _start = DateTime.Now;
         
-        return responses.Dequeue();
+            if (_hasExpirationTime) {
+                while (((DateTime.Now - _start).TotalMilliseconds / 1000f) < 5f && responses.Count == 0) { }
+        
+                if (((DateTime.Now - _start).TotalMilliseconds / 1000f) <= 5f) {
+                    return responses.Dequeue();
+                }
+        
+                if (_debugging.Length != 0)
+                    Debug.Log($"There was an expiration time for: {_debugging}");
+        
+                return Response.EXPIRATION_TIME_ERROR;
+            } else {
+                while (responses.Count == 0) { }
+        
+                return responses.Dequeue();
+            }
+        });
+        
+        try {
+            var _response = responses.Dequeue();
+            
+            if(_debugging.Length != 0)
+                Debug.Log($"Got a response {_response} from: {_debugging}");
+        
+            return _response;
+        }
+        catch (Exception) {
+            var _asyncResult = _t.BeginInvoke(null, null);
+            return (Response)_t.EndInvoke(_asyncResult);
+        }
+
+        // while (responses.Count == 0) { }
+        //
+        // return responses.Dequeue();
     }
 
     private static void onReceive(IAsyncResult _result) {
