@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Games;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour {
     public Sprite[] sprites;
 
     public Button playCardButton;
-    
+
     private void Start()  {
         Debug.Log("Handling match starting.");
         var _response = ClientTCP.getResponseFromServer(true, "Matched started");
@@ -83,6 +84,27 @@ public class GameManager : MonoBehaviour {
         
         this.myTurnText.gameObject.SetActive(GlobalInfo.isMyTurn);
         this.playCardButton.enabled = GlobalInfo.isMyTurn;
+        
+        GameObject _cardOnTableParent = GameObject.Find("CardOnTable");
+        var _cardOnTable = Instantiate(this.enemyCardPrefab, new Vector3(), Quaternion.identity);
+        var _cardOnTableSprite = _cardOnTable.transform.GetChild(0).gameObject;
+        TestGame _testGame = (TestGame)GlobalInfo.game;
+        _cardOnTableSprite.GetComponent<SpriteRenderer>().sprite = this.getCardSprite(_testGame.getCardOnTable().Value, _testGame.getCardOnTable().Suit);
+        _cardOnTable.transform.SetParent(_cardOnTableParent.transform);
+        
+        var _cardOnTableRectTransform = _cardOnTable.GetComponent<RectTransform>();
+        _cardOnTableRectTransform.localScale = new Vector3(0.75f, 0.75f, 1f);
+        var _cardOnTablePosition = _cardOnTableRectTransform.position;
+        _cardOnTablePosition.Set(0, 0, -1);
+        
+    }
+
+    public void onClickPlayButton() {
+        var _selectedCard = GlobalInfo.playerCards.Find(_card => _card.SelectedToPlay);
+        if(GlobalInfo.game.isMovementValid(_selectedCard.Value, _selectedCard.Suit))
+            Debug.Log("Movimiento valido.");
+        else
+            Debug.Log("Movimiento erroneo.");
     }
     
     private void Update() {

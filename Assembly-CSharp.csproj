@@ -71,6 +71,8 @@
      <Compile Include="Assets\Scripts\ClientManger.cs" />
      <Compile Include="Assets\Scripts\ClientTCP.cs" />
      <Compile Include="Assets\Scripts\GameType.cs" />
+     <Compile Include="Assets\Scripts\Games\Game.cs" />
+     <Compile Include="Assets\Scripts\Games\TestGame.cs" />
      <Compile Include="Assets\Scripts\GlobalInfo.cs" />
      <Compile Include="Assets\Scripts\InnerFileReader.cs" />
      <Compile Include="Assets\Scripts\Packets.cs" />

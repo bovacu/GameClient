@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Games;
 using UnityEngine;
 
 public static class GlobalInfo {
@@ -45,6 +46,8 @@ public static class GlobalInfo {
     public static List<OtherPlayer> otherPlayers;
     public static Dictionary<int, int> otherPlayersCardCount;
     public static List<CardInfo> playerCards;
+
+    public static IGame game;
 
     public static bool isMyTurn = false;
 

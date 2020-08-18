@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Security.Cryptography;
+using Games;
 using UnityEngine;
 
 public class ClientHandlerData {
@@ -209,6 +210,11 @@ public class ClientHandlerData {
 
         var _turn = _buffer.readInteger();
         GlobalInfo.isMyTurn = GlobalInfo.playerInfo.id == _turn;
+
+        var _cardOnTableValue = _buffer.readInteger();
+        var _cardOnTableSuit = (Suit)_buffer.readInteger();
+        
+        GlobalInfo.game = new TestGame(_cardOnTableValue, _cardOnTableSuit);
 
         return Response.RECEIVED_CARDS_PER_PLAYER_AND_TURN;
     }
