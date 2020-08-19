@@ -48,6 +48,10 @@ public class ClientTCP {
         }
     }
 
+    public static void clearResponsesQueue() {
+        responses.Clear();
+    }
+    
     public static Response getResponseFromServer(bool _hasExpirationTime = true, string _debugging = "") {
 
         var _t = new waiter(() => {
@@ -100,13 +104,13 @@ public class ClientTCP {
             Buffer.BlockCopy(ClientTCP.buffer, 0, _newData, 0, _bytesRead);
             
             var _response = ClientHandlerData.handleData(_newData);
-            if (_response != Response.PLAYER_JOINED_MATCH)
+            if (_response != Response.PLAYER_JOINED_MATCH || _response != Response.TEST_GAME_UPDATE)
                 responses.Enqueue(_response);
 
             ClientTCP.inOutStream.BeginRead(ClientTCP.buffer, 0, MAX_BUFFER_SIZE * 2, onReceive, null);
         }
-        catch (Exception) {
-            // ignored
+        catch (Exception _ex) {
+            Debug.LogError($"Error on OnReceive: {_ex.Message}");
         }
     }
 
@@ -201,6 +205,67 @@ public class ClientTCP {
 
         // 3. Write desired info.
         _buffer.writeInteger((int)_typeOfGame);
+
+        // 4. Send the data.
+        sendData(_buffer.toArray());
+    }
+
+    public static void sendNewTestGameMovementPacket(int _value, Suit _suit) {
+        // 1. Create ByteBuffer
+        var _buffer = new ByteBuffer();
+
+        // 2. Add packet ID.
+        _buffer.writeInteger((int)ClientPckts.TEST_GAME_MOVEMENT);
+
+        // 3. Write desired info.
+        _buffer.writeInteger(GlobalInfo.playerInfo.matchId);
+        _buffer.writeInteger(_value);
+        _buffer.writeInteger((int)_suit);
+
+        // 4. Send the data.
+        sendData(_buffer.toArray());
+    }
+
+    public static void sendHandCardNumberUpdate(int _numberOfCards) {
+        // 1. Create ByteBuffer
+        var _buffer = new ByteBuffer();
+
+        // 2. Add packet ID.
+        _buffer.writeInteger((int)ClientPckts.HAND_CARDS_UPDATE);
+
+        // 3. Write desired info.
+        _buffer.writeInteger(GlobalInfo.playerInfo.matchId);
+        _buffer.writeInteger(_numberOfCards);
+
+        Debug.LogError("Sent notification of hand update");
+        // 4. Send the data.
+        sendData(_buffer.toArray());
+    }
+
+    public static void sendAskForCardsToDraw(int _numberOfCards) {
+        // 1. Create ByteBuffer
+        var _buffer = new ByteBuffer();
+
+        // 2. Add packet ID.
+        _buffer.writeInteger((int)ClientPckts.ASK_FOR_CARDS);
+
+        // 3. Write desired info.
+        _buffer.writeInteger(GlobalInfo.playerInfo.matchId);
+        _buffer.writeInteger(_numberOfCards);
+
+        // 4. Send the data.
+        sendData(_buffer.toArray());
+    }
+
+    public static void sendPassTurn() {
+        // 1. Create ByteBuffer
+        var _buffer = new ByteBuffer();
+
+        // 2. Add packet ID.
+        _buffer.writeInteger((int)ClientPckts.PASS_TURN);
+
+        // 3. Write desired info.
+        _buffer.writeInteger(GlobalInfo.playerInfo.matchId);
 
         // 4. Send the data.
         sendData(_buffer.toArray());

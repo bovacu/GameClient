@@ -7,7 +7,9 @@
     MATCH_STARTS                        = 6,
     SENDING_CARD                        = 7,
     SENDING_LIST_CARDS                  = 8,
-    CARDS_PER_PLAYER_AND_INITIAL_TURN   = 9
+    CARDS_PER_PLAYER_AND_INITIAL_TURN   = 9,
+    TEST_GAME_UPDATE                    = 10,
+    HAND_CARDS_UPDATE                   = 11
 }
 
 public enum ClientPckts {
@@ -18,5 +20,8 @@ public enum ClientPckts {
     GET_PLAYER_INFO     = 5,
     APP_VERSION         = 6,
     SEARCH_MATCH        = 7,
-    MATCH_MOVEMENT      = 8
+    TEST_GAME_MOVEMENT  = 8,
+    ASK_FOR_CARDS       = 9,
+    HAND_CARDS_UPDATE   = 10,
+    PASS_TURN           = 11
 }

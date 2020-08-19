@@ -2,9 +2,11 @@
     
     public class TestGame : IGame {
         private CardInfo cardOnTable;
+        public bool DrawOnceAlready;
 
         public TestGame(int _value, Suit _suit) {
             this.cardOnTable = new CardInfo(_value, _suit);
+            this.DrawOnceAlready = false;
         }
         
         public bool isMovementValid(int _value, Suit _suit) {

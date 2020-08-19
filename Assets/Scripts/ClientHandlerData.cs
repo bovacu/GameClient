@@ -20,6 +20,8 @@ public class ClientHandlerData {
         ClientHandlerData.packetListener.Add((int)ServerPckts.SENDING_CARD, handleReceivingCard);
         ClientHandlerData.packetListener.Add((int)ServerPckts.SENDING_LIST_CARDS, handleReceivingCardList);
         ClientHandlerData.packetListener.Add((int)ServerPckts.CARDS_PER_PLAYER_AND_INITIAL_TURN, handleCardsPerPlayerAndInitialTurn);
+        ClientHandlerData.packetListener.Add((int)ServerPckts.TEST_GAME_UPDATE, handleTestGameUpdate);
+        ClientHandlerData.packetListener.Add((int)ServerPckts.HAND_CARDS_UPDATE, handleHandCardsUpdate);
     }
 
     public static Response handleData(byte[] _data) {
@@ -140,6 +142,8 @@ public class ClientHandlerData {
 
         GlobalInfo.playerInfo.matchId = _buffer.readInteger();
         GlobalInfo.playerInfo.inMatch = true;
+        
+        Debug.LogError("HANDLED ADDED TO MATCH.");
 
         return Response.ADDED_TO_MATCH;
     }
@@ -154,6 +158,8 @@ public class ClientHandlerData {
 
         GlobalInfo.otherPlayers.Add(new GlobalInfo.OtherPlayer(_playerId, _playerName));
         
+        Debug.LogError("HANDLED PLAYER JOINED.");
+        
         return Response.PLAYER_JOINED_MATCH;
     }
 
@@ -164,6 +170,8 @@ public class ClientHandlerData {
 
         // None sense info.
         _buffer.readString();
+        
+        Debug.LogError("HANDLED MATCH STARTS.");
         
         return Response.LOAD_MATCH_SCENE;
     }
@@ -194,6 +202,8 @@ public class ClientHandlerData {
             GlobalInfo.playerCards.Add(new CardInfo(_value, _suit));
         }
 
+        Debug.LogError("HANDLED CARD LIST RECEIVED.");
+        
         return Response.RECEIVED_CARD_LIST;
     }
 
@@ -215,8 +225,47 @@ public class ClientHandlerData {
         var _cardOnTableSuit = (Suit)_buffer.readInteger();
         
         GlobalInfo.game = new TestGame(_cardOnTableValue, _cardOnTableSuit);
+        
+        Debug.LogError("HANDLED CARDS PER PLAYER AND INITIAL TURN.");
 
         return Response.RECEIVED_CARDS_PER_PLAYER_AND_TURN;
+    }
+
+    private static Response handleHandCardsUpdate(byte[] _data) {
+        var _buffer = new ByteBuffer();
+        _buffer.writeBytes(_data);
+        var _packetId = _buffer.readInteger();
+
+        var _whoUpdated = _buffer.readInteger();
+        var _howMany = _buffer.readInteger();
+
+        GlobalInfo.otherPlayersCardCount[_whoUpdated] += _howMany;
+        GameManager.updateEnemyHand = true;
+        return Response.OK;
+    }
+    
+    private static Response handleTestGameUpdate(byte[] _data) {
+        var _buffer = new ByteBuffer();
+        _buffer.writeBytes(_data);
+        var _packetId = _buffer.readInteger();
+
+        var _whoMadeTheUpdateId = _buffer.readInteger();
+        var _cardValue = _buffer.readInteger();
+        var _cardSuit = (Suit)_buffer.readInteger();
+        var _nextTurn = _buffer.readInteger();
+
+        GlobalInfo.isMyTurn = GlobalInfo.playerInfo.id == _nextTurn;
+        
+        if (_cardValue >= 0) {
+            GameManager.whoMadeTheUpdate = _whoMadeTheUpdateId;
+            GlobalInfo.otherPlayersCardCount[_whoMadeTheUpdateId] = GlobalInfo.otherPlayersCardCount[_whoMadeTheUpdateId] - 1;
+            TestGame _testGame = (TestGame) GlobalInfo.game;
+            _testGame.getCardOnTable().Value = _cardValue;
+            _testGame.getCardOnTable().Suit = _cardSuit;
+            GameManager.newUpdateInGame = GlobalInfo.isMyTurn;
+        }
+
+        return Response.TEST_GAME_UPDATE;
     }
     
 }
