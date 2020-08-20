@@ -56,7 +56,7 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11172}
+      Script: {instanceID: 11170}
     - Class: 114
       Script: {instanceID: 11466}
     - Class: 114
@@ -109,7 +109,7 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11172}
+      Script: {instanceID: 11170}
     - Class: 114
       Script: {instanceID: 11466}
     - Class: 114
@@ -170,7 +170,9 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11172}
+      Script: {instanceID: 11170}
+    - Class: 114
+      Script: {instanceID: 11218}
     - Class: 114
       Script: {instanceID: 11466}
     - Class: 114
@@ -189,8 +191,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14284}
     - Class: 114
       Script: {instanceID: 14376}
-    - Class: 114
-      Script: {instanceID: 171802}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -198,6 +198,10 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
       Script: {instanceID: 0}
     - Class: 212
       Script: {instanceID: 0}
@@ -222,6 +226,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SelectionCaret
+  - hash:
+      serializedVersion: 2
+      Hash: 5741eb86a7b57c50956c174ae27293e5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DrawDeckController
   - hash:
       serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
@@ -308,7 +318,7 @@ ScriptsOnlyBuild:
     className: TMP_InputField
   - hash:
       serializedVersion: 2
-      Hash: 09b5632e29835a2ad21c72e20c2717a0
+      Hash: 1cf632fec805f0a9227afd7bcef96244
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -750,12 +760,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: DrawDeckController
   platform: 5
   scenePathNames:
   - Assets/Scenes/LoadingScene.unity

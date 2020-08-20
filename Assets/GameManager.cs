@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Games;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
@@ -12,6 +13,9 @@ public class GameManager : MonoBehaviour {
     public static int whoMadeTheUpdate = -1;
     public static bool updateMyHand = false;
     public static bool updateEnemyHand = false;
+    public static bool justTurnUpdate = false;
+    public static bool playWrongMoveAnimation = false;
+    public static int winner = -1;
     
     private Dictionary<int, int> spacing = new Dictionary<int, int>() {
         {8, -1340},
@@ -29,16 +33,22 @@ public class GameManager : MonoBehaviour {
     public GameObject canvas;
     public Text[] otherPlayersNames;
 
-    public Text myTurnText;
+    public Text myTurnText, winText, wrongMovementText;
+    public static Vector3 originalWrongMovementTextPosition;
     
     private GameObject hand;
     public GameObject cardPrefab, enemyCardPrefab;
     public Texture2D cardDeck;
     public Sprite[] sprites;
 
-    public Button playCardButton;
+    public Button playCardButton, passTurnBtn, returnToMainMenuBtn;
+
+    public ParticleSystem confetti;
 
     private void Start()  {
+        originalWrongMovementTextPosition = wrongMovementText.GetComponent<RectTransform>().localPosition;
+        Debug.Log(originalWrongMovementTextPosition);
+        
         Debug.Log("Handling match starting.");
         var _response = ClientTCP.getResponseFromServer(true, "Matched started");
         Debug.Log($"Handled match started with response {_response}.");
@@ -82,6 +92,7 @@ public class GameManager : MonoBehaviour {
         
         this.myTurnText.gameObject.SetActive(GlobalInfo.isMyTurn);
         this.playCardButton.enabled = GlobalInfo.isMyTurn;
+        this.passTurnBtn.enabled = GlobalInfo.isMyTurn;
         
         var _random = new System.Random();
         var _rotation = (_random.Next(10, 45)) * (_random.Next(0, 2) == 0 ? 1f : -1f);
@@ -91,6 +102,40 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
+        if (winner >= 0) {
+            returnToMainMenuBtn.gameObject.SetActive(true);
+            
+            winText.gameObject.SetActive(true);
+            winText.text = winner == GlobalInfo.playerInfo.id ? "You win!!" : "You loose...";
+
+            if (winner == GlobalInfo.playerInfo.id) {
+                this.confetti.gameObject.SetActive(true);
+                this.confetti.Play();
+            }
+
+            playCardButton.enabled = false;
+            passTurnBtn.enabled = false;
+            myTurnText.gameObject.SetActive(false);
+            winner = -1;
+            GameManager.newUpdateInGame = false;
+        }
+        
+        if (playWrongMoveAnimation) {
+            var _transform = wrongMovementText.transform.localPosition;
+            wrongMovementText.transform.localPosition = new Vector3(_transform.x, _transform.y + Time.deltaTime * 50, _transform.z);
+            
+            var _color = this.wrongMovementText.color;
+            _color = Color.Lerp(_color, new Color(_color.r, _color.g, _color.b, 0), 5 * Time.deltaTime);
+            this.wrongMovementText.color = _color;
+
+            var _deckGameObject = GameObject.Find("Deck");
+            var _cardSon = _deckGameObject.transform.GetChild(0).GetComponent<RectTransform>();
+            if (_color.a <= 0 || _transform.y > _deckGameObject.GetComponent<RectTransform>().localPosition.y - _cardSon.sizeDelta.y / 2f) {
+                playWrongMoveAnimation = false;
+                wrongMovementText.gameObject.SetActive(false);
+            }
+        }
+        
         if (GameManager.newUpdateInGame) {
             GameManager.newUpdateInGame = false;
             TestGame _testGame = (TestGame) GlobalInfo.game;
@@ -102,6 +147,14 @@ public class GameManager : MonoBehaviour {
             
             this.myTurnText.gameObject.SetActive(GlobalInfo.isMyTurn);
             this.playCardButton.enabled = GlobalInfo.isMyTurn;
+            this.passTurnBtn.enabled = GlobalInfo.isMyTurn;
+        }
+
+        if (justTurnUpdate) {
+            justTurnUpdate = false;
+            this.myTurnText.gameObject.SetActive(GlobalInfo.isMyTurn);
+            this.playCardButton.enabled = GlobalInfo.isMyTurn;
+            this.passTurnBtn.enabled = GlobalInfo.isMyTurn;
         }
 
         if (updateMyHand) {
@@ -130,7 +183,7 @@ public class GameManager : MonoBehaviour {
     
     public void onClickPlayButton() {
         if (!GlobalInfo.isMyTurn) return;
-        
+
         var _selectedCard = GlobalInfo.playerCards.Find(_card => _card.SelectedToPlay);
         if (_selectedCard != null && GlobalInfo.game.isMovementValid(_selectedCard.Value, _selectedCard.Suit)) {
             // Adding the played card to the table.
@@ -138,37 +191,68 @@ public class GameManager : MonoBehaviour {
             var _rotation = (_random.Next(10, 45)) * (_random.Next(0, 2) == 0 ? 1f : -1f);
             this.addCardToTheTable(_selectedCard.Value, _selectedCard.Suit, _rotation);
             
-            // Removing it from my hand
+            // Removing it from my hand. Includes removing it from GlobalInfo.playerCards.
             this.removeCardFromMyHand(_selectedCard.Value, _selectedCard.Suit);
             ClientTCP.sendNewTestGameMovementPacket(_selectedCard.Value, _selectedCard.Suit);
             
             this.myTurnText.gameObject.SetActive(false);
             this.playCardButton.enabled = false;
+            this.passTurnBtn.enabled = false;
             
             var _testGame = (TestGame) GlobalInfo.game;
             _testGame.DrawOnceAlready = false;
+            
+            if(GlobalInfo.playerCards.Count == 0)
+                ClientTCP.sendTestGamePlayerWonMatch();
+            
+        } else {
+            if (_selectedCard == null) {
+                this.restartWrongMovementText("First select a card!");
+                return;
+            }
+            
+            this.restartWrongMovementText("Can't do that movement!");
         }
-        else
-            Debug.Log("Movimiento erroneo.");
     }
 
     public void onClickPassTurnButton() {
         TestGame _testGame = (TestGame) GlobalInfo.game;
         
         if (GlobalInfo.playerCards.Any(_card => _testGame.isMovementValid(_card.Value, _card.Suit))) {
-            Debug.LogError("You still have cards to play!");
+            this.restartWrongMovementText("You still have cards to play!");
             return;
         }
         
         if (!_testGame.DrawOnceAlready) {
-            Debug.LogError("First draw a card");
+            this.restartWrongMovementText("First draw a card");
             return;
         }
         
         ClientTCP.sendPassTurn();
         this.myTurnText.gameObject.SetActive(false);
         this.playCardButton.enabled = false;
+        this.passTurnBtn.enabled = false;
         _testGame.DrawOnceAlready = false;
+    }
+
+    public void onClickReturnToMainMenu() {
+        GlobalInfo.game = null;
+        GlobalInfo.otherPlayers.Clear();
+        GlobalInfo.playerCards.Clear();
+        GlobalInfo.isMyTurn = false;
+        GlobalInfo.otherPlayersCardCount.Clear();
+
+        GlobalInfo.playerInfo.inMatch = false;
+        GlobalInfo.playerInfo.matchId = -1;
+        
+        newUpdateInGame = false;
+        whoMadeTheUpdate = -1;
+        updateMyHand = false;
+        updateEnemyHand = false;
+        justTurnUpdate = false;
+        playWrongMoveAnimation = false;
+
+        SceneManager.LoadScene("MainMenu");
     }
     
     private Sprite getCardSprite(int _value, Suit _suit) {
@@ -230,5 +314,14 @@ public class GameManager : MonoBehaviour {
             Destroy(_enemyHand.transform.GetChild(0).gameObject);
             _enemyHand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[GlobalInfo.otherPlayersCardCount[_enemyId]];
         }
+    }
+
+    private void restartWrongMovementText(string _error) {
+        this.wrongMovementText.gameObject.SetActive(true);
+        this.wrongMovementText.text = _error;
+        playWrongMoveAnimation = true;
+        this.wrongMovementText.transform.localPosition = originalWrongMovementTextPosition;
+        var _color = this.wrongMovementText.color;
+        this.wrongMovementText.color = new Color(_color.r, _color.g, _color.b, 255);
     }
 }

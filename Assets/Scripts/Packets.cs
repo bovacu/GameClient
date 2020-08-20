@@ -9,7 +9,8 @@
     SENDING_LIST_CARDS                  = 8,
     CARDS_PER_PLAYER_AND_INITIAL_TURN   = 9,
     TEST_GAME_UPDATE                    = 10,
-    HAND_CARDS_UPDATE                   = 11
+    HAND_CARDS_UPDATE                   = 11,
+    PLAYER_FINISHED                     = 12
 }
 
 public enum ClientPckts {
@@ -23,5 +24,6 @@ public enum ClientPckts {
     TEST_GAME_MOVEMENT  = 8,
     ASK_FOR_CARDS       = 9,
     HAND_CARDS_UPDATE   = 10,
-    PASS_TURN           = 11
+    PASS_TURN           = 11,
+    PLAYER_FINISHED     = 12
 }

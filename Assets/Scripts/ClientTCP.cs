@@ -271,6 +271,20 @@ public class ClientTCP {
         sendData(_buffer.toArray());
     }
 
+    public static void sendTestGamePlayerWonMatch() {
+        // 1. Create ByteBuffer
+        var _buffer = new ByteBuffer();
+
+        // 2. Add packet ID.
+        _buffer.writeInteger((int)ClientPckts.PLAYER_FINISHED);
+
+        // 3. Write desired info.
+        _buffer.writeInteger(GlobalInfo.playerInfo.matchId);
+
+        // 4. Send the data.
+        sendData(_buffer.toArray());
+    }
+
     public static void sendPacketQuitApp() {
         var _buffer = new ByteBuffer();
 
