@@ -21,16 +21,6 @@ public static class GlobalInfo {
         public int matchId;
     }
 
-    public struct OtherPlayer {
-        public string UserName { get; }
-        public int Id  { get; }
-        
-        public OtherPlayer(int _id, string _name) {
-            this.Id = _id;
-            this.UserName = _name;
-        }
-    }
-
     public enum ERROR { NONE, TIME_OUT, DIFFERENT_VERSION, ALREADY_ONLINE };
 
     public static PlayerInfo playerInfo;
@@ -42,14 +32,6 @@ public static class GlobalInfo {
     private static string ipAddress = "192.168.5.136";
     private static int port = 5555;
     private static Thread loadingThread;
-
-    public static List<OtherPlayer> otherPlayers;
-    public static Dictionary<int, int> otherPlayersCardCount;
-    public static List<CardInfo> playerCards;
-
-    public static IGame game;
-
-    public static bool isMyTurn = false;
 
     // Tasks to load.
     // 1. Connect to the server. (50%)
@@ -75,9 +57,6 @@ public static class GlobalInfo {
         // The connection established answer. DO NOT MOVE, REALLY REALLY IMPORTANT.
         ClientTCP.getResponseFromServer(true, "Welcome response");
         GlobalInfo.loadingProgress += 33;
-        GlobalInfo.otherPlayers = new List<OtherPlayer>();
-        GlobalInfo.playerCards = new List<CardInfo>();
-        GlobalInfo.otherPlayersCardCount = new Dictionary<int, int>();
 
         ClientTCP.sendPacketAppVersion();
         Response _response = ClientTCP.getResponseFromServer(true, "App version");
@@ -158,13 +137,5 @@ public static class GlobalInfo {
     public static void stopLoadingForError() {
         if(GlobalInfo.loadingThread.IsAlive)
             GlobalInfo.loadingThread.Interrupt();
-    }
-
-    public static CardInfo getCard(int _value, Suit _suit) {
-        for(var _i = 0; _i < playerCards.Count; _i++)
-            if (playerCards[_i].Value == _value && playerCards[_i].Suit == _suit)
-                return playerCards[_i];
-
-        return new CardInfo(-1, (Suit)10);
     }
 }

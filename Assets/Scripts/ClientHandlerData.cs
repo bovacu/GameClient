@@ -19,10 +19,11 @@ public class ClientHandlerData {
         ClientHandlerData.packetListener.Add((int)ServerPckts.MATCH_STARTS, handleMatchStarts);
         ClientHandlerData.packetListener.Add((int)ServerPckts.SENDING_CARD, handleReceivingCard);
         ClientHandlerData.packetListener.Add((int)ServerPckts.SENDING_LIST_CARDS, handleReceivingCardList);
-        ClientHandlerData.packetListener.Add((int)ServerPckts.CARDS_PER_PLAYER_AND_INITIAL_TURN, handleCardsPerPlayerAndInitialTurn);
+        ClientHandlerData.packetListener.Add((int)ServerPckts.INIT_TEST_GAME, handleInitTestGame);
         ClientHandlerData.packetListener.Add((int)ServerPckts.TEST_GAME_UPDATE, handleTestGameUpdate);
-        ClientHandlerData.packetListener.Add((int)ServerPckts.HAND_CARDS_UPDATE, handleHandCardsUpdate);
+        ClientHandlerData.packetListener.Add((int)ServerPckts.TEST_GAME_HAND_CARDS_UPDATE, handleTestGameHandCardsUpdate);
         ClientHandlerData.packetListener.Add((int)ServerPckts.PLAYER_FINISHED, handlePlayerFinished);
+        ClientHandlerData.packetListener.Add((int)ServerPckts.DECK_FINISHED, handleDeckFinished);
     }
 
     public static Response handleData(byte[] _data) {
@@ -139,7 +140,7 @@ public class ClientHandlerData {
             _playersNames.Add(_buffer.readString());
 
         for (var _i = 0; _i < _numberOfPlayers; _i++)
-            GlobalInfo.otherPlayers.Add(new GlobalInfo.OtherPlayer(_playersIds[_i], _playersNames[_i]));
+            GameManager.Game.getOtherPlayers().Add(new OtherPlayer(_playersIds[_i], _playersNames[_i]));
 
         GlobalInfo.playerInfo.matchId = _buffer.readInteger();
         GlobalInfo.playerInfo.inMatch = true;
@@ -157,7 +158,7 @@ public class ClientHandlerData {
         var _playerId = _buffer.readInteger();
         var _playerName = _buffer.readString();
 
-        GlobalInfo.otherPlayers.Add(new GlobalInfo.OtherPlayer(_playerId, _playerName));
+        GameManager.Game.getOtherPlayers().Add(new OtherPlayer(_playerId, _playerName));
         
         Debug.LogError("HANDLED PLAYER JOINED.");
         
@@ -169,7 +170,7 @@ public class ClientHandlerData {
         _buffer.writeBytes(_data);
         var _packetId = _buffer.readInteger();
 
-        // None sense info.
+        // Non-sense info.
         _buffer.readString();
         
         Debug.LogError("HANDLED MATCH STARTS.");
@@ -200,7 +201,7 @@ public class ClientHandlerData {
         for (var _i = 0; _i < _numberOfCards; _i++) {
             var _value = _buffer.readInteger();
             var _suit = (Suit) _buffer.readInteger();
-            GlobalInfo.playerCards.Add(new CardInfo(_value, _suit));
+            GameManager.Game.getPlayerCards().Add(new CardInfo(_value, _suit));
         }
 
         Debug.LogError("HANDLED CARD LIST RECEIVED.");
@@ -208,31 +209,32 @@ public class ClientHandlerData {
         return Response.RECEIVED_CARD_LIST;
     }
 
-    private static Response handleCardsPerPlayerAndInitialTurn(byte[] _data) {
+    private static Response handleInitTestGame(byte[] _data) {
         var _buffer = new ByteBuffer();
         _buffer.writeBytes(_data);
         var _packetId = _buffer.readInteger();
 
-        for (var _i = 0; _i < GlobalInfo.otherPlayers.Count; _i++) {
+        for (var _i = 0; _i < GameManager.Game.getOtherPlayers().Count; _i++) {
             var _playerId = _buffer.readInteger();
             var _numberOfCards = _buffer.readInteger();
-            GlobalInfo.otherPlayersCardCount.Add(_playerId, _numberOfCards);
+            GameManager.Game.getCardsPerPlayer().Add(_playerId, _numberOfCards);
         }
 
         var _turn = _buffer.readInteger();
-        GlobalInfo.isMyTurn = GlobalInfo.playerInfo.id == _turn;
-
         var _cardOnTableValue = _buffer.readInteger();
         var _cardOnTableSuit = (Suit)_buffer.readInteger();
-        
-        GlobalInfo.game = new TestGame(_cardOnTableValue, _cardOnTableSuit);
+
+        var _testGame = (TestGame) GameManager.Game;
+        _testGame.getCardOnTable().Value = _cardOnTableValue;
+        _testGame.getCardOnTable().Suit = _cardOnTableSuit;
+        GameManager.Game.setIsMyTurn(GlobalInfo.playerInfo.id == _turn);
         
         Debug.LogError("HANDLED CARDS PER PLAYER AND INITIAL TURN.");
 
-        return Response.RECEIVED_CARDS_PER_PLAYER_AND_TURN;
+        return Response.TEST_GAME_INITIATED;
     }
 
-    private static Response handleHandCardsUpdate(byte[] _data) {
+    private static Response handleTestGameHandCardsUpdate(byte[] _data) {
         var _buffer = new ByteBuffer();
         _buffer.writeBytes(_data);
         var _packetId = _buffer.readInteger();
@@ -240,7 +242,7 @@ public class ClientHandlerData {
         var _whoUpdated = _buffer.readInteger();
         var _howMany = _buffer.readInteger();
 
-        GlobalInfo.otherPlayersCardCount[_whoUpdated] += _howMany;
+        GameManager.Game.getCardsPerPlayer()[_whoUpdated] += _howMany;
         GameManager.updateEnemyHand = true;
         return Response.OK;
     }
@@ -255,15 +257,15 @@ public class ClientHandlerData {
         var _cardSuit = (Suit)_buffer.readInteger();
         var _nextTurn = _buffer.readInteger();
 
-        GlobalInfo.isMyTurn = GlobalInfo.playerInfo.id == _nextTurn;
+        GameManager.Game.setIsMyTurn(GlobalInfo.playerInfo.id == _nextTurn);
 
         if (_cardValue >= 0) {
             GameManager.whoMadeTheUpdate = _whoMadeTheUpdateId;
-            GlobalInfo.otherPlayersCardCount[_whoMadeTheUpdateId] = GlobalInfo.otherPlayersCardCount[_whoMadeTheUpdateId] - 1;
-            TestGame _testGame = (TestGame) GlobalInfo.game;
+            GameManager.Game.getCardsPerPlayer()[_whoMadeTheUpdateId] = GameManager.Game.getCardsPerPlayer()[_whoMadeTheUpdateId] - 1;
+            var _testGame = (TestGame) GameManager.Game;
             _testGame.getCardOnTable().Value = _cardValue;
             _testGame.getCardOnTable().Suit = _cardSuit;
-            GameManager.newUpdateInGame = GlobalInfo.isMyTurn;
+            GameManager.newUpdateInGame = GameManager.Game.isMyTurn();
         }else
             GameManager.justTurnUpdate = true;
 
@@ -279,6 +281,17 @@ public class ClientHandlerData {
 
         GameManager.winner = _winnerId;
         
+        return Response.OK;
+    }
+
+    private static Response handleDeckFinished(byte[] _data) {
+        var _buffer = new ByteBuffer();
+        _buffer.writeBytes(_data);
+        var _packetId = _buffer.readInteger();
+
+        _buffer.readInteger();
+        GameManager.deckFinished = true;
+
         return Response.OK;
     }
     

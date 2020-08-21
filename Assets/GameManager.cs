@@ -7,17 +7,41 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// TODO ===============================================================================================================
+// TODO =                                                   TODO                                                      =
+// TODO ===============================================================================================================
+// TODO =                                                                                                             =
+// TODO =   Move everything related to TestGame gameplay from GameManager to TestGame                                 =
+// TODO =                                                                                                             =
+// TODO ===============================================================================================================
+
 public class GameManager : MonoBehaviour {
 
+    public static IGame Game;
+    
     public static bool newUpdateInGame = false;
     public static int whoMadeTheUpdate = -1;
     public static bool updateMyHand = false;
     public static bool updateEnemyHand = false;
     public static bool justTurnUpdate = false;
     public static bool playWrongMoveAnimation = false;
+    public static bool deckFinished = false;
     public static int winner = -1;
+    public static bool canStillDraw = true;
     
-    private Dictionary<int, int> spacing = new Dictionary<int, int>() {
+    private readonly Dictionary<int, int> spacing = new Dictionary<int, int>() {
+        {20, -1510},
+        {19, -1510},
+        {18, -1500},
+        {17, -1500},
+        {16, -1500},
+        {15, -1450},
+        {14, -1450},
+        {13, -1450},
+        {12, -1390},
+        {11, -1390},
+        {10, -1340},
+        {9, -1340},
         {8, -1340},
         {7, -1290},
         {6, -1200},
@@ -26,7 +50,7 @@ public class GameManager : MonoBehaviour {
         {3, -1090},
         {2, -1075},
         {1, -1075},
-        {0, -1075},
+        {0, -1075}
     };
 
     public Image background;
@@ -48,34 +72,26 @@ public class GameManager : MonoBehaviour {
     private void Start()  {
         originalWrongMovementTextPosition = wrongMovementText.GetComponent<RectTransform>().localPosition;
         Debug.Log(originalWrongMovementTextPosition);
-        
-        Debug.Log("Handling match starting.");
-        var _response = ClientTCP.getResponseFromServer(true, "Matched started");
-        Debug.Log($"Handled match started with response {_response}.");
-        if (_response == Response.LOAD_MATCH_SCENE) {
-            Debug.Log("Handling getting cards.");
-            _response = ClientTCP.getResponseFromServer(true, "Getting cards");
-            Debug.Log($"Handled got cards with response {_response}.");
-        }
 
         this.hand = GameObject.Find("Hand");
         this.sprites = Resources.LoadAll<Sprite>(this.cardDeck.name);
-        this.hand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[GlobalInfo.playerCards.Count];
+        this.hand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[Game.getPlayerCards().Count];
+
+        // Necessary as if the code is faster than receiving the server cards, they won't load properly.
+        while (ClientTCP.getResponseFromServer(true, "Getting cards") != Response.RECEIVED_CARD_LIST) { }
         
-        for (var _i = 0; _i < GlobalInfo.playerCards.Count; _i++)
-            this.addCardToHand(GlobalInfo.playerCards[_i].Value, GlobalInfo.playerCards[_i].Suit, _i);
+        for (var _i = 0; _i < Game.getPlayerCards().Count; _i++)
+            this.addCardToHand(Game.getPlayerCards()[_i].Value, Game.getPlayerCards()[_i].Suit, _i);
 
-
-        Debug.Log("Handling getting cards per player per turn.");
-        _response = ClientTCP.getResponseFromServer(true, "Cards per player per turn");
-        Debug.Log($"Handled got cards per player per turn with response {_response}.");
+        // Necessary as if the code is faster than receiving the server cards, they won't load properly.
+        while (ClientTCP.getResponseFromServer(true, "Cards per player per turn") != Response.TEST_GAME_INITIATED) { }
         
         ClientTCP.clearResponsesQueue();
 
         var _enemyHand = GameObject.Find("EnemyHand1");
-        _enemyHand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[GlobalInfo.playerCards.Count];
+        _enemyHand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[Game.getPlayerCards().Count];
 
-        foreach (var _player in GlobalInfo.otherPlayersCardCount) {
+        foreach (var _player in Game.getCardsPerPlayer()) {
             for (var _i = 0; _i < _player.Value; _i++) {
                 var _card = Instantiate(this.enemyCardPrefab, new Vector3(), Quaternion.identity);
                 _card.transform.SetParent(_enemyHand.transform);
@@ -87,17 +103,17 @@ public class GameManager : MonoBehaviour {
         }
         
         this.background.GetComponent<RectTransform>().sizeDelta = this.canvas.GetComponent<RectTransform>().sizeDelta;
-        for (var _i = 0; _i < GlobalInfo.otherPlayers.Count; _i++)
-            this.otherPlayersNames[_i].text = GlobalInfo.otherPlayers[_i].UserName;
+        for (var _i = 0; _i < Game.getOtherPlayers().Count; _i++)
+            this.otherPlayersNames[_i].text = Game.getOtherPlayers()[_i].UserName;
         
-        this.myTurnText.gameObject.SetActive(GlobalInfo.isMyTurn);
-        this.playCardButton.enabled = GlobalInfo.isMyTurn;
-        this.passTurnBtn.enabled = GlobalInfo.isMyTurn;
+        this.myTurnText.gameObject.SetActive(Game.isMyTurn());
+        this.playCardButton.enabled = Game.isMyTurn();
+        this.passTurnBtn.enabled = Game.isMyTurn();
         
         var _random = new System.Random();
         var _rotation = (_random.Next(10, 45)) * (_random.Next(0, 2) == 0 ? 1f : -1f);
 
-        var _testGame = (TestGame) GlobalInfo.game;
+        var _testGame = (TestGame)Game;
         this.addCardToTheTable(_testGame.getCardOnTable().Value, _testGame.getCardOnTable().Suit, 0);
     }
 
@@ -138,23 +154,23 @@ public class GameManager : MonoBehaviour {
         
         if (GameManager.newUpdateInGame) {
             GameManager.newUpdateInGame = false;
-            TestGame _testGame = (TestGame) GlobalInfo.game;
+            TestGame _testGame = (TestGame)Game;
             var _random = new System.Random();
             var _rotation = (_random.Next(10, 45)) * (_random.Next(0, 2) == 0 ? 1f : -1f);
             this.addCardToTheTable(_testGame.getCardOnTable().Value, _testGame.getCardOnTable().Suit, _rotation);
             
             this.removeCardFromEnemyHand(GameManager.whoMadeTheUpdate, GameObject.Find("EnemyHand1"));
             
-            this.myTurnText.gameObject.SetActive(GlobalInfo.isMyTurn);
-            this.playCardButton.enabled = GlobalInfo.isMyTurn;
-            this.passTurnBtn.enabled = GlobalInfo.isMyTurn;
+            this.myTurnText.gameObject.SetActive(Game.isMyTurn());
+            this.playCardButton.enabled = Game.isMyTurn();
+            this.passTurnBtn.enabled = Game.isMyTurn();
         }
 
         if (justTurnUpdate) {
             justTurnUpdate = false;
-            this.myTurnText.gameObject.SetActive(GlobalInfo.isMyTurn);
-            this.playCardButton.enabled = GlobalInfo.isMyTurn;
-            this.passTurnBtn.enabled = GlobalInfo.isMyTurn;
+            this.myTurnText.gameObject.SetActive(Game.isMyTurn());
+            this.playCardButton.enabled = Game.isMyTurn();
+            this.passTurnBtn.enabled = Game.isMyTurn();
         }
 
         if (updateMyHand) {
@@ -164,13 +180,13 @@ public class GameManager : MonoBehaviour {
             foreach (Transform _card in this.hand.transform)
                 _zIndices.Add(_card.GetComponent<RectTransform>().localPosition.z);
 
-            this.addCardToHand(GlobalInfo.playerCards.Last().Value, GlobalInfo.playerCards.Last().Suit, (int)_zIndices.Max() + 1);
+            this.addCardToHand(Game.getPlayerCards().Last().Value, Game.getPlayerCards().Last().Suit, (int)_zIndices.Max() + 1);
         }
 
         if (updateEnemyHand) {
             updateEnemyHand = false;
             var _enemyHand = GameObject.Find("EnemyHand1");
-            _enemyHand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[GlobalInfo.otherPlayersCardCount[GlobalInfo.otherPlayers[0].Id]];
+            _enemyHand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[Game.getCardsPerPlayer()[Game.getOtherPlayers()[0].Id]];
             
             var _card = Instantiate(this.enemyCardPrefab, new Vector3(), Quaternion.identity);
             _card.transform.SetParent(_enemyHand.transform);
@@ -179,13 +195,27 @@ public class GameManager : MonoBehaviour {
             var _position = _rectTransform.position;
             _position.Set(_position.x, _position.y, -1);
         }
+
+        if (GameManager.deckFinished) {
+            GameManager.deckFinished = false;
+            GameObject.Destroy(GameObject.Find("Deck"));
+            GameManager.canStillDraw = false;
+        }
+    }
+
+    public static CardInfo getCard(int _value, Suit _suit) {
+        for(var _i = 0; _i < Game.getPlayerCards().Count; _i++)
+            if (Game.getPlayerCards()[_i].Value == _value && Game.getPlayerCards()[_i].Suit == _suit)
+                return Game.getPlayerCards()[_i];
+
+        return new CardInfo(-1, (Suit)10);
     }
     
     public void onClickPlayButton() {
-        if (!GlobalInfo.isMyTurn) return;
+        if (!Game.isMyTurn()) return;
 
-        var _selectedCard = GlobalInfo.playerCards.Find(_card => _card.SelectedToPlay);
-        if (_selectedCard != null && GlobalInfo.game.isMovementValid(_selectedCard.Value, _selectedCard.Suit)) {
+        var _selectedCard = Game.getPlayerCards().Find(_card => _card.SelectedToPlay);
+        if (_selectedCard != null && Game.isMovementValid(_selectedCard.Value, _selectedCard.Suit)) {
             // Adding the played card to the table.
             var _random = new System.Random();
             var _rotation = (_random.Next(10, 45)) * (_random.Next(0, 2) == 0 ? 1f : -1f);
@@ -199,10 +229,10 @@ public class GameManager : MonoBehaviour {
             this.playCardButton.enabled = false;
             this.passTurnBtn.enabled = false;
             
-            var _testGame = (TestGame) GlobalInfo.game;
-            _testGame.DrawOnceAlready = false;
+            var _testGame = (TestGame)Game;
+            _testGame.alreadyDrawnCard = false;
             
-            if(GlobalInfo.playerCards.Count == 0)
+            if(Game.getPlayerCards().Count == 0)
                 ClientTCP.sendTestGamePlayerWonMatch();
             
         } else {
@@ -216,14 +246,14 @@ public class GameManager : MonoBehaviour {
     }
 
     public void onClickPassTurnButton() {
-        TestGame _testGame = (TestGame) GlobalInfo.game;
-        
-        if (GlobalInfo.playerCards.Any(_card => _testGame.isMovementValid(_card.Value, _card.Suit))) {
+        if (Game.getPlayerCards().Any(_card => Game.isMovementValid(_card.Value, _card.Suit))) {
             this.restartWrongMovementText("You still have cards to play!");
             return;
         }
+
+        var _testGame = (TestGame) Game;
         
-        if (!_testGame.DrawOnceAlready) {
+        if (!_testGame.alreadyDrawnCard && GameManager.canStillDraw) {
             this.restartWrongMovementText("First draw a card");
             return;
         }
@@ -232,15 +262,15 @@ public class GameManager : MonoBehaviour {
         this.myTurnText.gameObject.SetActive(false);
         this.playCardButton.enabled = false;
         this.passTurnBtn.enabled = false;
-        _testGame.DrawOnceAlready = false;
+        _testGame.alreadyDrawnCard = false;
     }
 
     public void onClickReturnToMainMenu() {
-        GlobalInfo.game = null;
-        GlobalInfo.otherPlayers.Clear();
-        GlobalInfo.playerCards.Clear();
-        GlobalInfo.isMyTurn = false;
-        GlobalInfo.otherPlayersCardCount.Clear();
+        Game.getOtherPlayers().Clear();
+        Game.getPlayerCards().Clear();
+        Game.setIsMyTurn(false);
+        Game.getCardsPerPlayer().Clear();
+        Game = null;
 
         GlobalInfo.playerInfo.inMatch = false;
         GlobalInfo.playerInfo.matchId = -1;
@@ -272,7 +302,7 @@ public class GameManager : MonoBehaviour {
         _cardOnTableRectTransform.localPosition = new Vector3(0, 0, -_cardOnTableParent.transform.childCount);
         _cardOnTableRectTransform.localEulerAngles = new Vector3(0, 0, _rotation);
         
-        var _testGame = (TestGame) GlobalInfo.game;
+        var _testGame = (TestGame)Game;
         _testGame.getCardOnTable().Suit = _suit;
         _testGame.getCardOnTable().Value = _value;
     }
@@ -305,14 +335,14 @@ public class GameManager : MonoBehaviour {
         }
         
         Destroy(_toDestroy);
-        GlobalInfo.playerCards.Remove( GlobalInfo.playerCards.Single( _card => _card.SelectedToPlay ) );
-        this.hand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[GlobalInfo.playerCards.Count];
+        Game.getPlayerCards().Remove( Game.getPlayerCards().Single( _card => _card.SelectedToPlay ) );
+        this.hand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[Game.getPlayerCards().Count];
     }
 
     private void removeCardFromEnemyHand(int _enemyId, GameObject _enemyHand) {
         if (_enemyHand.transform.childCount > 0) {
             Destroy(_enemyHand.transform.GetChild(0).gameObject);
-            _enemyHand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[GlobalInfo.otherPlayersCardCount[_enemyId]];
+            _enemyHand.GetComponent<HorizontalLayoutGroup>().spacing = spacing[Game.getCardsPerPlayer()[_enemyId]];
         }
     }
 

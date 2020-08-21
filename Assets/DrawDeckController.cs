@@ -8,9 +8,9 @@ public class DrawDeckController : MonoBehaviour {
     public Text wrongMovementText;
     
     public void OnMouseDown() {
-        TestGame _testGame = (TestGame) GlobalInfo.game;
+        TestGame _testGame = (TestGame) GameManager.Game;
 
-        if (GlobalInfo.playerCards.Any(_card => _testGame.isMovementValid(_card.Value, _card.Suit))) {
+        if (_testGame.getPlayerCards().Any(_card => _testGame.isMovementValid(_card.Value, _card.Suit))) {
             this.wrongMovementText.gameObject.SetActive(true);
             this.wrongMovementText.text = "You still have cards to play!";
             GameManager.playWrongMoveAnimation = true;
@@ -21,7 +21,7 @@ public class DrawDeckController : MonoBehaviour {
             return;
         }
 
-        if (_testGame.DrawOnceAlready) {
+        if (_testGame.alreadyDrawnCard) {
             this.wrongMovementText.gameObject.SetActive(true);
             this.wrongMovementText.text = "You already draw a card, if you can't play pass turn!";
             GameManager.playWrongMoveAnimation = true;
@@ -34,7 +34,7 @@ public class DrawDeckController : MonoBehaviour {
 
         ClientTCP.sendHandCardNumberUpdate(1);
         
-        _testGame.DrawOnceAlready = true;
+        _testGame.alreadyDrawnCard = true;
         ClientTCP.sendAskForCardsToDraw(1);
         
         while (ClientTCP.getResponseFromServer(true) != Response.RECEIVED_CARD_LIST) { }

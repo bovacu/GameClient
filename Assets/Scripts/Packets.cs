@@ -7,10 +7,11 @@
     MATCH_STARTS                        = 6,
     SENDING_CARD                        = 7,
     SENDING_LIST_CARDS                  = 8,
-    CARDS_PER_PLAYER_AND_INITIAL_TURN   = 9,
+    INIT_TEST_GAME                      = 9,
     TEST_GAME_UPDATE                    = 10,
-    HAND_CARDS_UPDATE                   = 11,
-    PLAYER_FINISHED                     = 12
+    TEST_GAME_HAND_CARDS_UPDATE         = 11,
+    PLAYER_FINISHED                     = 12,
+    DECK_FINISHED                       = 13
 }
 
 public enum ClientPckts {
